@@ -10,6 +10,45 @@
       Background="#E8EFFF">
 
     <Grid>
-        
+        <Border x:Name="panel" Grid.Row="1" Background="#FFFFFF" Height="520" Width="622" CornerRadius="5">
+            <Button Height="20" Width="80" Background="Transparent" Margin="18,18,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding OpenWelcome}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="BackHome" Height="20" Width="80" Margin="0,0,0,0">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/back.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=BackHome}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/backhover.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+        </Border>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="538"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Page>

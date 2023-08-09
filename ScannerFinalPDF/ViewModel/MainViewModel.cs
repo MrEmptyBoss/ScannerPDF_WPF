@@ -35,11 +35,19 @@ namespace ScannerFinalPDF.ViewModel
             CurrentPage = Welcome;
         }
 
-        public ICommand OpenProfilePage
+        public ICommand OpenControlPanel
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = Profile);
+                return new RelayCommand(() => CurrentPage = ControlPanel);
+            }
+        }
+
+        public ICommand OpenWelcome
+        {
+            get
+            {
+                return new RelayCommand(() => CurrentPage = Welcome);
             }
         }
 
