@@ -50,7 +50,41 @@
             </StackPanel>
         </Grid>
         <Grid Name="NavPanel" Grid.Row="1" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="550">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="660">
+                <Button Height="30" Width="135" Background="Transparent" Margin="13,0,0,0" Command="{Binding OpenWelcome}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <Image Name="OpenH" Height="30" Width="135" Margin="0,0,0,0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="/Resources/Images/home.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=OpenH}"
+                                             Value="True">
+                                        <Setter Property="Source" Value="/Resources/Images/homeact.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Button>
                 <Button Height="30" Width="135" Background="Transparent" Margin="13,0,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
