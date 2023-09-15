@@ -196,6 +196,7 @@
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\Position.cs" />
     <Compile Include="Model\Data\User.cs" />
+    <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelControlPanel.cs" />

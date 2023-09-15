@@ -8,8 +8,15 @@ namespace ScannerFinalPDF.Model.Data
 {
     class Position
     {
+        public int id { get; set; }
 
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
 
-
+        }
+        public Position() { }
     }
 }

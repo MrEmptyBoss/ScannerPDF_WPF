@@ -89,7 +89,7 @@
             <TextBlock Text="Авторизация" FontSize ="22" FontWeight="Bold" FontFamily="Open Sans" Margin="54, 0, 0, 0" HorizontalAlignment="Left"/>
         </Grid>
         <Grid Grid.Row ="4" Background="Transparent">
-            <TextBox x:Name="loginT" Style="{StaticResource TB}" />
+            <TextBox x:Name="loginT" Style="{StaticResource TB}" Text="{Binding Login}" />
             <TextBlock IsHitTestVisible="False" FontSize="14" Text="Данные для ввода логина" Margin="65,11,13,13">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -104,7 +104,7 @@
             </TextBlock>
         </Grid>
         <Grid Grid.Row ="6" Background="Transparent">
-            <TextBox x:Name="PassT" Style="{StaticResource TB}"/>
+            <TextBox x:Name="PassT" Style="{StaticResource TB}" Text="{Binding Password}"/>
             <TextBlock IsHitTestVisible="False" FontSize="14" Text="Данные для ввода пароля" Margin="65,11,13,13">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -130,7 +130,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <Button Content="Войти" Click="Button_Click">
+                <Button Content="Войти" Command="{Binding AuthObrB}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>

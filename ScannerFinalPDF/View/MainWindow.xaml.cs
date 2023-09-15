@@ -1,4 +1,5 @@
 ﻿using ScannerFinalPDF.View;
+using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace ScannerFinalPDF
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainHome secondForm;
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new AuthViewModel();
         }
 
         private void CloseButt_MouseDown(object sender, MouseButtonEventArgs e)
@@ -43,14 +44,6 @@ namespace ScannerFinalPDF
             {
                 this.DragMove();
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            secondForm = new MainHome();
-            secondForm.setCreatingForm = this;
-            secondForm.Show();
-            this.Close();
         }
     }
 }
