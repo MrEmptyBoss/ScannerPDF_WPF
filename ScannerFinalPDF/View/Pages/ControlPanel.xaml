@@ -16,7 +16,7 @@
             <TextBlock Text="Панель управления администратора" FontSize="22" FontWeight="Bold" FontFamily="OpenSans" Margin="347,18,433,471"/>
             <TextBlock Text="Настройка аккаунта" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,61,692,436"/>
             <TextBlock Text="Загрузка текстового документа &#10;с данными сотрудников" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,93,756,396" Foreground="#2D2D2D" Opacity="0.5"/>
-            <Button Height="30" Width="180" Background="Transparent" Margin="347,136,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Click="Button_Click">
+            <Button Height="30" Width="180" Background="Transparent" Margin="347,136,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding CreateAccB}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -52,7 +52,7 @@
             </Button>
             <TextBlock Text="Экспорт данных" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,192,692,306"/>
             <TextBlock Text="Экспорт excel таблицы с заявками &#10;и ошибками оформителей" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,224,740,266" Foreground="#2D2D2D" Opacity="0.5"/>
-            <Button Height="30" Width="180" Background="Transparent" Margin="347,267,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Click="Button_Click">
+            <Button Height="30" Width="180" Background="Transparent" Margin="347,267,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>

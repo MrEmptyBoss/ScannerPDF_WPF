@@ -1,18 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    public class ApplicationContext:DbContext
+    class ApplicationContext : DbContext
     {
-        public ApplicationContext()
-        {
-            Database.EnsureCreated();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-        }
-    }
 
+        public DbSet<User> Users { get; set; }
+
+        public ApplicationContext() : base("DefaultConnection") { }
+
+    }
 }

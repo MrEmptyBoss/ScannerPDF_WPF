@@ -1,4 +1,5 @@
-﻿using ScannerFinalPDF.ViewModel;
+﻿using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,7 @@ namespace ScannerFinalPDF.View.Pages
         public ControlPanel()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
+            DataContext = new ViewModelControlPanel();
         }
     }
 }
