@@ -48,8 +48,15 @@ namespace ScannerFinalPDF.ViewModel
                 secondForm.nameuser.Text = authUser.Fio;
                 if(authUser.Position == 0)
                 {
+                    
                     secondForm.panelupr.Visibility = Visibility.Hidden;
                     secondForm.paneluprb.Visibility = Visibility.Hidden;
+
+                    secondForm.ZakrB.Visibility = Visibility.Hidden;
+                    secondForm.ZakrZ.Visibility = Visibility.Hidden;
+
+                    secondForm.OpenZB.Visibility = Visibility.Hidden;
+                    secondForm.OpenZ.Visibility = Visibility.Hidden;
 
                 }
                 else

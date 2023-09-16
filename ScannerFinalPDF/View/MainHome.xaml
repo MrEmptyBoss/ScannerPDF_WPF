@@ -50,7 +50,7 @@
             </StackPanel>
         </Grid>
         <Grid Name="NavPanel" Grid.Row="1" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="660">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="860">
                 <Button Height="30" Width="135" Background="Transparent" Margin="13,0,0,0" Command="{Binding OpenWelcome}">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -85,7 +85,7 @@
                         </Image.Style>
                     </Image>
                 </Button>
-                <Button Height="30" Width="135" Background="Transparent" Margin="13,0,0,0">
+                <Button x:Name="OpenZB" Height="30" Width="135" Background="Transparent" Margin="13,0,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -119,7 +119,7 @@
                         </Image.Style>
                     </Image>
                 </Button>
-                <Button Height="30" Width="144" Background="Transparent" Margin="18,0,0,0">
+                <Button x:Name="ZakrB" Height="30" Width="144" Background="Transparent" Margin="18,0,0,0">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -187,11 +187,42 @@
                         </Image.Style>
                     </Image>
                 </Button>
+                <Button x:Name="CreateB" Height="30" Width="144" Background="Transparent" Margin="18,0,0,0" Command="{Binding OpenCreateZayv}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <Image Name="CreateZ" Height="30" Width="144" Margin="0,0,0,0">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="/Resources/Images/Create.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=CreateZ}"
+                                             Value="True">
+                                        <Setter Property="Source" Value="/Resources/Images/CreateAct.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="290">
-                <Image Source="/Resources/Images/logo.png" Width="30" Height="30">
-                    
-                </Image>
                 <TextBlock x:Name="nameuser" Margin="10,0,5,0" VerticalAlignment="Center">
                     
                 </TextBlock>

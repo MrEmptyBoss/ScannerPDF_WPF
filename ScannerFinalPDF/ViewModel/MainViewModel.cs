@@ -15,6 +15,8 @@ namespace ScannerFinalPDF.ViewModel
         private Page Profile;
         private Page Settings;
         private Page ControlPanel;
+        private Page CreateZayvok;
+
 
         private Page _currentPage;
 
@@ -31,6 +33,8 @@ namespace ScannerFinalPDF.ViewModel
             Profile = new View.Pages.Profile();
             Settings = new View.Pages.Settings();
             ControlPanel = new View.Pages.ControlPanel();
+            CreateZayvok = new View.Pages.CreateZayvka();
+
 
             CurrentPage = Welcome;
         }
@@ -40,6 +44,14 @@ namespace ScannerFinalPDF.ViewModel
             get
             {
                 return new RelayCommand(() => CurrentPage = ControlPanel);
+            }
+        }
+
+        public ICommand OpenCreateZayv
+        {
+            get
+            {
+                return new RelayCommand(() => CurrentPage = CreateZayvok);
             }
         }
 

@@ -203,6 +203,9 @@
     <Compile Include="View\Pages\ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\CreateZayvka.xaml.cs">
+      <DependentUpon>CreateZayvka.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Pages\ControlPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\CreateZayvka.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,6 +335,10 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Exc.png" />
     <Resource Include="Resources\Images\Excactiv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Create.png" />
+    <Resource Include="Resources\Images\CreateAct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
