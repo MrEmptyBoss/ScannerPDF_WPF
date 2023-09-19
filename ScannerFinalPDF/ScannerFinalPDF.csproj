@@ -195,6 +195,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\Position.cs" />
+    <Compile Include="Model\Data\RS.cs" />
     <Compile Include="Model\Data\User.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -339,6 +340,14 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Create.png" />
     <Resource Include="Resources\Images\CreateAct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\NewEmail.png" />
+    <Resource Include="Resources\Images\NewEmailAct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EditEmail.png" />
+    <Resource Include="Resources\Images\EditEmailAct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

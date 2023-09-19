@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.EntityFrameworkCore;
 using ScannerFinalPDF.Model.Data;
 using ScannerFinalPDF.View.Pages;
 
@@ -17,10 +22,39 @@ namespace ScannerFinalPDF.ViewModel
     class ViewModelControlPanel : ViewModelBase
     {
         ApplicationContext db;
+        private RS selectedRs;
+        public ObservableCollection<RS> Rs { get; set; }
 
         public ViewModelControlPanel()
         {
             db = new ApplicationContext();
+            cmbx();
+        }
+
+        public RS SelectedRS
+        {
+            get { return selectedRs; }
+            set
+            {
+                selectedRs = value;
+                OnPropertyChanged("SelectedRS");
+            }
+        }
+
+        public void cmbx()
+        {
+            db = new ApplicationContext();
+            db.RS.Load();
+            Rs = db.RS.Local;
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         public ICommand CreateAccB

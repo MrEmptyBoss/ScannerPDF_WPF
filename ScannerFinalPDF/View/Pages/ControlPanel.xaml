@@ -88,6 +88,84 @@
             </Button>
             <TextBlock Text="Почтовые адреса" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,333,692,165"/>
             <TextBlock Text="Для быстрого выбора получателя письма, &#10;вы можете добавить почтовые адреса типографий" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,365,640,125" Foreground="#2D2D2D" Opacity="0.5"/>
+            <ListBox Grid.Column="0" ItemsSource="{Binding Rs}"
+             SelectedItem="{Binding selectedRs}" Margin="347,400,550,45">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <TextBlock FontSize="11" Text="{Binding Path=Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Height="30" Width="180" Background="Transparent" Margin="347,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="Newemail" Height="30" Width="180" Margin="0,0,0,0">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/NewEmail.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=Newemail}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/NewEmailAct.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <Button Height="30" Width="180" Background="Transparent" Margin="0,480,0,0" HorizontalAlignment="Center" VerticalAlignment ="Top">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="Editemail" Height="30" Width="180" Margin="0,0,0,0">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/EditEmail.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=Editemail}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/EditEmailAct.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
         </Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="18"/>
