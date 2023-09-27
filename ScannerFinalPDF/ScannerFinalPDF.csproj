@@ -199,8 +199,12 @@
     <Compile Include="Model\Data\User.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RSViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelControlPanel.cs" />
+    <Compile Include="View\EmailMess.xaml.cs">
+      <DependentUpon>EmailMess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,10 @@
     <Compile Include="View\Pages\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\EmailMess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

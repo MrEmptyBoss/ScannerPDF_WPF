@@ -94,11 +94,12 @@
                     <DataTemplate>
                         <StackPanel Margin="5">
                             <TextBlock FontSize="11" Text="{Binding Path=Name}" />
+                            <TextBlock FontSize="11" Text="{Binding Path=Email}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Height="30" Width="180" Background="Transparent" Margin="347,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top">
+            <Button Height="30" Width="180" Background="Transparent" Margin="347,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding CreateOpenMessB}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>

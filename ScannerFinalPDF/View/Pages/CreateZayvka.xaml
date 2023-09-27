@@ -16,13 +16,7 @@
             <TextBlock Text="Создание заявки" FontSize="22" FontWeight="Bold" FontFamily="OpenSans" Margin="347,18,433,471"/>
             <TextBlock Text="Выбрать РЦ" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,61,692,436"/>
             <ComboBox Height="25" Margin="347,89,812,406">
-                <TextBlock>8072</TextBlock>
-                <TextBlock>8032</TextBlock>
-                <TextBlock>8052</TextBlock>
-                <TextBlock>8023</TextBlock>
-                <TextBlock>8117</TextBlock>
-                <TextBlock>8123</TextBlock>
-                <TextBlock>8092</TextBlock>
+            <TextBlock></TextBlock>
             </ComboBox>
             <TextBlock Text="Введите ТК" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="507,62,653,436"/>
             <TextBox Height="25" Margin="507,89,653,406"/>

@@ -14,6 +14,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
 using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.View;
 using ScannerFinalPDF.View.Pages;
 
 namespace ScannerFinalPDF.ViewModel
@@ -63,6 +64,20 @@ namespace ScannerFinalPDF.ViewModel
             {
                 return new RelayCommand(() => CreateAcc());
             }
+        }
+
+        public ICommand CreateOpenMessB
+        {
+            get
+            {
+                return new RelayCommand(() => CreateOpenMess());
+            }
+        }
+
+        public void CreateOpenMess()
+        {
+            EmailMess Mess = new EmailMess();
+            Mess.Show();
         }
 
         public void CreateAcc()
