@@ -1,6 +1,8 @@
-﻿using ScannerFinalPDF.ViewModel;
+﻿using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +22,20 @@ namespace ScannerFinalPDF.View
     /// </summary>
     public partial class EmailMess : Window
     {
-        public EmailMess()
+        public EmailMess(string email, int name)
         {
             InitializeComponent();
-            DataContext = new RSViewModel();
+            if (email == "Введите" )
+            {
+                DataContext = new RSViewModel(Emailch, RSTch);
+            }
+            else
+            {
+                RSTch.Text = Convert.ToString(name);
+                Emailch.Text = email;
+                DataContext = new RSViewModel(Emailch, RSTch);
+            }
+            
         }
 
         private void CloseButt_MouseDown(object sender, MouseButtonEventArgs e)

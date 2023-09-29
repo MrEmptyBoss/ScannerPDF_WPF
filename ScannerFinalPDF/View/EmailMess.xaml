@@ -86,11 +86,11 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row ="2" Background="Transparent">
-            <TextBlock Text="Добавление РЦ" FontSize ="22" FontWeight="Bold" FontFamily="Open Sans" Margin="54, 0, 0, 0" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="nname"  Text="Добавление РЦ" FontSize ="22" FontWeight="Bold" FontFamily="Open Sans" Margin="54, 0, 0, 0" HorizontalAlignment="Left"/>
         </Grid>
         <Grid Grid.Row ="4" Background="Transparent">
             <TextBox x:Name="RST" Style="{StaticResource TB}" Text="{Binding Name}" />
-            <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите название РЦ" Margin="65,11,13,13">
+            <TextBlock x:Name="RSTch" IsHitTestVisible="False" FontSize="14" Text="Введите название РЦ" Margin="65,11,13,13">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -105,7 +105,7 @@
         </Grid>
         <Grid Grid.Row ="6" Background="Transparent">
             <TextBox x:Name="EmailT" Style="{StaticResource TB}" Text="{Binding Email}"/>
-            <TextBlock IsHitTestVisible="False" FontSize="14" Text="Введите email" Margin="65,11,13,13">
+            <TextBlock x:Name="Emailch" IsHitTestVisible="False" FontSize="14" Text="Введите email" Margin="65,11,13,13">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -130,7 +130,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <Button Content="Добавить" Command="{Binding AddRsB}">
+                <Button x:Name="addsavebtn" Content="Добавить" Command="{Binding AddRsB}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>

@@ -10,7 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
 using ScannerFinalPDF.Model.Data;
@@ -34,7 +37,7 @@ namespace ScannerFinalPDF.ViewModel
 
         public RS SelectedRS
         {
-            get { return selectedRs; }
+            get {return selectedRs; }
             set
             {
                 selectedRs = value;
@@ -57,7 +60,6 @@ namespace ScannerFinalPDF.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
         public ICommand CreateAccB
         {
             get
@@ -74,10 +76,46 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
+        public ICommand EditOpenMessB
+        {
+            get
+            {
+                return new RelayCommand(() => EditOpenMess());
+            }
+        }
+
+        public ICommand RefreshtoB
+        {
+            get
+            {
+                return new RelayCommand(() => Refresht());
+            }
+        }
+        public void Refresht()
+        {
+            db.RS.Load();
+            Rs = db.RS.Local;
+        }
         public void CreateOpenMess()
         {
-            EmailMess Mess = new EmailMess();
+            EmailMess Mess = new EmailMess("Введите", 0);
             Mess.Show();
+        }
+
+        public void EditOpenMess()
+        {
+            if(selectedRs != null)
+            {
+                EmailMess Mess = new EmailMess(selectedRs.Email, selectedRs.Name);
+                Mess.addsavebtn.Content = "Сохранить";
+                Mess.nname.Text = "Изменение РЦ";
+                Mess.Show();
+            }
+            else
+            {
+                MessageBox.Show("Выберите почту для изменения!");
+            }
+            
         }
 
         public void CreateAcc()
