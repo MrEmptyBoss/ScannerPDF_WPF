@@ -196,8 +196,10 @@
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\Position.cs" />
     <Compile Include="Model\Data\RS.cs" />
+    <Compile Include="Model\Data\Sroki.cs" />
     <Compile Include="Model\Data\User.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
+    <Compile Include="ViewModel\CreateViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RSViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

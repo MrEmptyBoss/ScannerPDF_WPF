@@ -37,7 +37,7 @@ namespace ScannerFinalPDF.ViewModel
 
         public RS SelectedRS
         {
-            get {return selectedRs; }
+            get { return selectedRs; }
             set
             {
                 selectedRs = value;
@@ -47,19 +47,11 @@ namespace ScannerFinalPDF.ViewModel
 
         public void cmbx()
         {
-            db = new ApplicationContext();
             db.RS.Load();
             Rs = db.RS.Local;
 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
         public ICommand CreateAccB
         {
             get
@@ -84,18 +76,6 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public ICommand RefreshtoB
-        {
-            get
-            {
-                return new RelayCommand(() => Refresht());
-            }
-        }
-        public void Refresht()
-        {
-            db.RS.Load();
-            Rs = db.RS.Local;
-        }
         public void CreateOpenMess()
         {
             EmailMess Mess = new EmailMess("Введите", 0);

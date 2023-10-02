@@ -12,6 +12,8 @@ namespace ScannerFinalPDF.Model.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<RS> RS { get; set; }
+        public DbSet<Sroki> Sroki { get; set; }
+
 
 
         public ApplicationContext() : base("DefaultConnection") { }

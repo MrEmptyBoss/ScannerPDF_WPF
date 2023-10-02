@@ -54,7 +54,6 @@ namespace ScannerFinalPDF.ViewModel
                     rs.Name = Convert.ToInt32(Name);
                     db.SaveChanges();
                     MessageBox.Show("Изменен РЦ");
-
                 }
                 else
                 {

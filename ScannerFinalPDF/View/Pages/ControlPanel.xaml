@@ -88,17 +88,17 @@
             </Button>
             <TextBlock Text="Почтовые адреса" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,333,692,165"/>
             <TextBlock Text="Для быстрого выбора получателя письма, &#10;вы можете добавить почтовые адреса типографий" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,365,640,125" Foreground="#2D2D2D" Opacity="0.5"/>
-            <ListBox Grid.Column="0" ItemsSource="{Binding Rs}"
-             SelectedItem="{Binding SelectedRS}" Margin="347,400,550,45">
-                <ListBox.ItemTemplate>
+            <ComboBox Height="25" Margin="347,400,753,95" ItemsSource="{Binding Rs}"  SelectedItem="{Binding SelectedRS}">
+                <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="5">
-                            <TextBlock FontSize="11" Text="{Binding Path=Name}" />
-                            <TextBlock FontSize="11" Text="{Binding Path=Email}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text=" - " />
+                            <TextBlock Text="{Binding Email}" />
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button Height="30" Width="180" Background="Transparent" Margin="347,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding CreateOpenMessB}">
                 <Button.Style>
                     <Style TargetType="Button">
