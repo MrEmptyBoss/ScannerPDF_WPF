@@ -50,5 +50,16 @@ namespace ScannerFinalPDF.View
         {
             this.Close();
         }
+
+        private void OpenProfile_Click(object sender, RoutedEventArgs e)
+        {
+            if (dialogM.Visibility == Visibility.Hidden)
+            {
+                dialogM.Visibility = Visibility.Visible;
+            }
+
+            else
+                dialogM.Visibility = Visibility.Hidden;
+        }
     }
 }

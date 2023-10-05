@@ -9,6 +9,8 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using ScannerFinalPDF.View;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace ScannerFinalPDF.ViewModel
 {
@@ -45,8 +47,11 @@ namespace ScannerFinalPDF.ViewModel
             {
                 secondForm = new MainHome();
                 secondForm.Show();
-                secondForm.nameuser.Text = authUser.Fio;
-                if(authUser.Position == 0)
+                //исправить!!!!
+                var s = secondForm.OpenProfile.Template;
+                var myTextBlock = (TextBlock)s.FindName("nameuser", secondForm.OpenProfile);
+                myTextBlock.Text = authUser.Fio;
+                if (authUser.Position == 0)
                 {
                     
                     secondForm.panelupr.Visibility = Visibility.Hidden;
