@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScannerFinalPDF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class RS
+    class RS:ViewModelBase
     {
         public int id { get; set; }
 
@@ -17,14 +18,18 @@ namespace ScannerFinalPDF.Model.Data
         public int Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value;
+                OnPropertyChanged("Name");
+            }
 
         }
 
         public string Email
         {
             get { return email; }
-            set { email = value; }
+            set { email = value;
+                OnPropertyChanged("Email");
+            }
 
         }
 

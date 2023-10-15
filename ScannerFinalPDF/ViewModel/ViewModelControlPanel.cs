@@ -27,13 +27,26 @@ namespace ScannerFinalPDF.ViewModel
     {
         ApplicationContext db;
         private RS selectedRs;
-        public ObservableCollection<RS> Rs { get; set; }
-
-        public ViewModelControlPanel()
+        private IEnumerable<RS> selectedRSs;
+        public IEnumerable<RS> Rs
+        {
+            get
+            {
+                return selectedRSs;
+            }
+            set
+            {
+                selectedRSs = value;
+                OnPropertyChanged("Rs");
+            }
+        }
+    public ViewModelControlPanel()
         {
             db = new ApplicationContext();
-            cmbx();
+            db.RS.Load();
+            Rs = db.RS.Local.ToBindingList();
         }
+
 
         public RS SelectedRS
         {
@@ -42,14 +55,8 @@ namespace ScannerFinalPDF.ViewModel
             {
                 selectedRs = value;
                 OnPropertyChanged("SelectedRS");
+                
             }
-        }
-
-        public void cmbx()
-        {
-            db.RS.Load();
-            Rs = db.RS.Local;
-
         }
 
         public ICommand CreateAccB

@@ -92,7 +92,7 @@
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Name}"  />
                             <TextBlock Text=" - " />
                             <TextBlock Text="{Binding Email}" />
                         </StackPanel>
