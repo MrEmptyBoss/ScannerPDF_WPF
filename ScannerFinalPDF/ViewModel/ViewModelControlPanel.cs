@@ -25,10 +25,11 @@ namespace ScannerFinalPDF.ViewModel
 
     class ViewModelControlPanel : ViewModelBase
     {
+        AlertPush alert;
         ApplicationContext db;
         private RS selectedRs;
-        private IEnumerable<RS> selectedRSs;
-        public IEnumerable<RS> Rs
+        private ObservableCollection<RS> selectedRSs;
+        public ObservableCollection<RS> Rs
         {
             get
             {
@@ -44,7 +45,8 @@ namespace ScannerFinalPDF.ViewModel
         {
             db = new ApplicationContext();
             db.RS.Load();
-            Rs = db.RS.Local.ToBindingList();
+            Rs = db.RS.Local;
+           
         }
 
 
@@ -55,7 +57,6 @@ namespace ScannerFinalPDF.ViewModel
             {
                 selectedRs = value;
                 OnPropertyChanged("SelectedRS");
-                
             }
         }
 
@@ -83,6 +84,23 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
+        public ICommand RefreshtoB
+        {
+            get
+            {
+                return new RelayCommand(() => Refreshh());
+            }
+        }
+
+        private void Refreshh()
+        {
+            db = new ApplicationContext();
+            db.RS.Load();
+            Rs = db.RS.Local;
+            alert = new AlertPush("Список обновлен!");
+            alert.Show();
+        }
+
         public void CreateOpenMess()
         {
             EmailMess Mess = new EmailMess("Введите", 0);
@@ -100,7 +118,8 @@ namespace ScannerFinalPDF.ViewModel
             }
             else
             {
-                MessageBox.Show("Выберите почту для изменения!");
+                alert = new AlertPush("Выберите почту для изменения!");
+                alert.Show();
             }
             
         }
@@ -139,14 +158,15 @@ namespace ScannerFinalPDF.ViewModel
                     }
                     
                 }
-
-                MessageBox.Show("Все пользователи добавлены!");
+                alert = new AlertPush("Все пользователи добавлены!");
+                alert.Show();
 
             }
 
             else
             {
-                MessageBox.Show("Вы не выбрали файл!");
+                alert = new AlertPush("Вы не выбрали файл!");
+                alert.Show();
                 List<User> users = db.Users.ToList();
 
             }

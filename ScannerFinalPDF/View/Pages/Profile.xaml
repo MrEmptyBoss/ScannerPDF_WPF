@@ -5,11 +5,61 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ScannerFinalPDF.View.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="520" d:DesignWidth="622"
-      Title="Profile"
-      Background="White">
+      d:DesignHeight="556" d:DesignWidth="1280"
+      Title="ControlPanel"
+      Background="#E8EFFF">
 
     <Grid>
-        <TextBlock Text="Профиль"/>
+        <Grid Name="MainContent" Grid.Row="1">
+            <Border x:Name="panel" Grid.Row="1" Background="#FFFFFF" Height="520" Width="622" CornerRadius="5">
+            </Border>
+            <TextBlock Text="Профиль" FontSize="22" FontWeight="Bold" FontFamily="OpenSans" Margin="347,18,433,471"/>
+            <TextBlock Text="Персональная информация" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,61,680,436"/>
+            <TextBlock Text="Фамилия Имя Отчество" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,93,740,413" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock x:Name="nametext" Text="Иван Иванов Иванович" FontSize="14" FontWeight="Regular" FontFamily="OpenSans" Margin="347,107,722,396" Foreground="#2D2D2D"/>
+            <Button Height="30" Width="180" Background="Transparent" Margin="756,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding dellActB}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="delacc" Height="30" Width="180" >
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/DelBtn.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=delacc}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/DelBtnAct.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <TextBlock Text="Дата рождения" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,133,740,373" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock x:Name="daterozh" Text="00000" FontSize="14" FontWeight="Regular" FontFamily="OpenSans" Margin="347,147,722,356" Foreground="#2D2D2D"/>
+            <TextBlock Text="Дата создания учетной записи" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,177,740,329" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock x:Name="datesozd" Text="00000" FontSize="14" FontWeight="Regular" FontFamily="OpenSans" Margin="347,191,722,312" Foreground="#2D2D2D"/>
+        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="520"/>
+            <RowDefinition Height="18"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Page>

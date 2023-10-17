@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -11,6 +12,7 @@ namespace ScannerFinalPDF.ViewModel
 {
     class MainViewModel : ViewModelBase
     {
+        MainWindow main;
         private Page Welcome;
         private Page Profile;
         private Page Settings;
@@ -46,12 +48,37 @@ namespace ScannerFinalPDF.ViewModel
                 return new RelayCommand(() => CurrentPage = ControlPanel);
             }
         }
+        public ICommand OpenProfile
+        {
+            get
+            {
+                return new RelayCommand(() => CurrentPage = Profile);
+            }
+        }
 
         public ICommand OpenCreateZayv
         {
             get
             {
                 return new RelayCommand(() => CurrentPage = CreateZayvok);
+            }
+        }
+
+        public ICommand ToAtuthB
+        {
+            get
+            {
+                return new RelayCommand(() => ToAtuth());
+            }
+        }
+
+        private void ToAtuth()
+        {
+            main = new MainWindow();
+            main.Show();
+            foreach (Window item in Application.Current.Windows)
+            {
+                if (item.DataContext == this) item.Close();
             }
         }
 

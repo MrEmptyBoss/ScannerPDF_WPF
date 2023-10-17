@@ -204,6 +204,9 @@
     <Compile Include="ViewModel\RSViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelControlPanel.cs" />
+    <Compile Include="View\AlertPush.xaml.cs">
+      <DependentUpon>AlertPush.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmailMess.xaml.cs">
       <DependentUpon>EmailMess.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,10 @@
     <Compile Include="View\Pages\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AlertPush.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EmailMess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -358,6 +365,14 @@
   <ItemGroup>
     <Resource Include="Resources\Images\EditEmail.png" />
     <Resource Include="Resources\Images\EditEmailAct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\RefreshB.png" />
+    <Resource Include="Resources\Images\RefreshBhover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DelBtn.png" />
+    <Resource Include="Resources\Images\DelBtnAct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

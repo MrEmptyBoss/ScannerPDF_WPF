@@ -167,7 +167,7 @@
                     </Image.Style>
                 </Image>
             </Button>
-            <Button Height="30" Width="180" Background="Transparent" Margin="640,365,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding RefreshtoB}">
+            <Button Height="30" Width="180" Background="Transparent" Margin="756,480,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding RefreshtoB}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -187,14 +187,14 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Image Name="refreshbt" Height="30" Width="180" Margin="0,0,0,0">
+                <Image Name="refreshbt" Height="30" Width="180" >
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="/Resources/Images/EditEmail.png"/>
+                            <Setter Property="Source" Value="/Resources/Images/RefreshB.png"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsMouseOver, ElementName=refreshbt}"
                                              Value="True">
-                                    <Setter Property="Source" Value="/Resources/Images/EditEmailAct.png"/>
+                                    <Setter Property="Source" Value="/Resources/Images/RefreshBhover.png"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

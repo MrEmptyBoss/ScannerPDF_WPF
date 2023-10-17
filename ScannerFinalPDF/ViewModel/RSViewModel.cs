@@ -10,11 +10,13 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.View;
 
 namespace ScannerFinalPDF.ViewModel
 {
     class RSViewModel : ViewModelBase
     {
+        AlertPush alert;
         ApplicationContext db;
         public string Email { get; set; }
         public string Name { get; set; }
@@ -54,7 +56,8 @@ namespace ScannerFinalPDF.ViewModel
                     rs.Email = Email;
                     rs.Name = Convert.ToInt32(Name);
                     db.SaveChanges();
-                    MessageBox.Show("Изменен РЦ");
+                    alert = new AlertPush("Изменен РЦ, обновите список");
+                    alert.Show();
                 }
                 else
                 {
@@ -63,7 +66,8 @@ namespace ScannerFinalPDF.ViewModel
                     RS rScurr = new RS(name, email);
                     db.RS.Add(rScurr);
                     db.SaveChanges();
-                    MessageBox.Show("Добавлен новый РЦ");
+                    alert = new AlertPush("Добавлен новый РЦ, обновите список");
+                    alert.Show();
                 }
             }
        
