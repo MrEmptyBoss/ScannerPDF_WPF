@@ -374,6 +374,10 @@
     <Resource Include="Resources\Images\DelBtn.png" />
     <Resource Include="Resources\Images\DelBtnAct.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ZagrMBtn.png" />
+    <Resource Include="Resources\Images\ZagrMBtnAct.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
