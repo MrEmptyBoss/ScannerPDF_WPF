@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
 using ScannerFinalPDF.Model.Data;
@@ -84,37 +85,41 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public ICommand RefreshtoB
-        {
-            get
-            {
-                return new RelayCommand(() => Refreshh());
-            }
-        }
-
-        private void Refreshh()
-        {
-            db = new ApplicationContext();
-            db.RS.Load();
-            Rs = db.RS.Local;
-            alert = new AlertPush("Список обновлен!");
-            alert.Show();
-        }
-
         public void CreateOpenMess()
         {
-            EmailMess Mess = new EmailMess("Введите", 0);
-            Mess.Show();
+            EmailMess Mess = new EmailMess("0", "Введите");
+            Mess.Emailch.Text = "Введите";
+            if (Mess.ShowDialog() == true)
+            {
+
+            }
+            else
+            {
+                db = new ApplicationContext();
+                db.RS.Load();
+                Rs = db.RS.Local;
+            }
         }
 
         public void EditOpenMess()
         {
             if(selectedRs != null)
             {
-                EmailMess Mess = new EmailMess(selectedRs.Email, selectedRs.Name);
+                EmailMess Mess = new EmailMess(Convert.ToString(selectedRs.Name), selectedRs.Email);
                 Mess.addsavebtn.Content = "Сохранить";
                 Mess.nname.Text = "Изменение РЦ";
-                Mess.Show();
+                Mess.RSTch.Text = Convert.ToString(selectedRs.Name);
+                Mess.Emailch.Text = selectedRs.Email;
+                if (Mess.ShowDialog() == true)
+                {
+
+                }
+                else
+                {
+                    db = new ApplicationContext();
+                    db.RS.Load();
+                    Rs = db.RS.Local;
+                }
             }
             else
             {
@@ -131,8 +136,6 @@ namespace ScannerFinalPDF.ViewModel
             dlg.Filter = "Text files (*.txt)|*.txt";
             Nullable<bool> result = dlg.ShowDialog();
 
-
-            // Get the selected file name and display in a TextBox 
             if (result == true)
             {
                 string filename = dlg.FileName;

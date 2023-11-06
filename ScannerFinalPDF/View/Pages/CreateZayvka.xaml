@@ -78,22 +78,21 @@
                     </Image.Style>
                 </Image>
             </Button>
-            <DataGrid x:Name="data_table_zayv" Margin="347,260,370,66" AutoGenerateColumns="True">
-                <DataGrid.Items>
-                    
-                </DataGrid.Items>
+            <DataGrid x:Name="data_table_zayv" Margin="347,260,352,66" ItemsSource="{Binding FilesP}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedFileP}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" CanUserReorderColumns="False" Visibility="Hidden">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Title}" Width="90" />
-                    <DataGridHyperlinkColumn Header="Длина" Binding="{Binding Path=Company}" Width="60" />
-                    <DataGridTextColumn Header="Ширина" Binding="{Binding Path=Price}" Width="60" />
-                    <DataGridTextColumn Header="Кол-во стр" Binding="{Binding Path=Price}" Width="70" />
-                    <DataGridTextColumn Header="Кол-во отпечатков" Binding="{Binding Path=Price}" Width="120" />
-                    <DataGridTextColumn Header="Итого шт" Binding="{Binding Path=Price}" Width="65" />
-                    <DataGridTextColumn Header="Заливка" Binding="{Binding Path=Price}" Width="55" />
-                    <DataGridTextColumn Header="м. кв." Binding="{Binding Path=Price}" Width="50" />
+                    <DataGridTextColumn Header="ID" Width="90" Visibility="Hidden" Binding="{Binding Path=id}"/>
+                    <DataGridTextColumn Header="Название" Width="90" Binding="{Binding Path=Name}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Длина" Width="60" Binding="{Binding Path=Length}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Ширина" Width="60" Binding="{Binding Path=Width}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Кол-во стр" Width="70" Binding="{Binding Path=Colstr}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Кол-во отпечатков" Width="120" Binding="{Binding Path=Colotp}"/>
+                    <DataGridTextColumn Header="Итого шт" Width="65" Binding="{Binding Path=Count}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Заливка" Width="55" Binding="{Binding Path=Fill}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="м. кв." Width="50" Binding="{Binding Path=Kvadr}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="ID req" Width="50" Visibility="Hidden" Binding="{Binding Path=Idrequest}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Height="30" Width="180" Background="Transparent" Margin="730,468,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding }">
+            <Button Height="30" Width="180" Background="Transparent" Margin="730,468,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding GetRowInfoBtn}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -116,11 +115,11 @@
                 <Image Name="SaveFile" Height="30" Width="180" Margin="0,0,0,0">
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
-                            <Setter Property="Source" Value="/Resources/Images/ZagrMBtn.png"/>
+                            <Setter Property="Source" Value="/Resources/Images/SendZBtn.png"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=ImportFile}"
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=SaveFile}"
                                              Value="True">
-                                    <Setter Property="Source" Value="/Resources/Images/ZagrMBtnAct.png"/>
+                                    <Setter Property="Source" Value="/Resources/Images/SendZBtnAct.png"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

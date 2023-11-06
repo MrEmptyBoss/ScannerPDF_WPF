@@ -194,6 +194,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Data\ApplicationContext.cs" />
+    <Compile Include="Model\Data\Maket.cs" />
+    <Compile Include="Model\Data\Zayvka.cs" />
     <Compile Include="Model\Data\Position.cs" />
     <Compile Include="Model\Data\RS.cs" />
     <Compile Include="Model\Data\Sroki.cs" />
@@ -377,6 +379,10 @@
   <ItemGroup>
     <Resource Include="Resources\Images\ZagrMBtn.png" />
     <Resource Include="Resources\Images\ZagrMBtnAct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\SendZBtn.png" />
+    <Resource Include="Resources\Images\SendZBtnAct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

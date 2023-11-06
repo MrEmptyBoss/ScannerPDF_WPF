@@ -22,19 +22,11 @@ namespace ScannerFinalPDF.View
     /// </summary>
     public partial class EmailMess : Window
     {
-        public EmailMess(string email, int name)
+        public EmailMess(string name, string email)
         {
             InitializeComponent();
-            if (email == "Введите" )
-            {
-                DataContext = new RSViewModel(Emailch, RSTch);
-            }
-            else
-            {
-                RSTch.Text = Convert.ToString(name);
-                Emailch.Text = email;
-                DataContext = new RSViewModel(Emailch, RSTch);
-            }
+            DataContext = new RSViewModel(email, name);
+
             
         }
 

@@ -11,91 +11,87 @@ namespace ScannerFinalPDF.Model.Data
     {
         public int id { get; set; }
 
-        private int idRS;
-        private int idusers;
-        private string namerequest;
-        private int idsroki;
-        private int nshop;
-        private DateTime datepriem;
-        private DateTime datedostav;
-        private DateTime dateclose;
-        private DateTime dateplanov;
-        private int numbertruck;
+        private string name;
+        private int length;
+        private int width;
+        private int colstr;
+        private int colotp;
+        private int count;
+        private int fill;
+        private double kvadr;
+        private int idrequest;
 
-        public int IdRS
+        public string Name
         {
-            get { return idRS; }
-            set { idRS = value; }
+            get { return name; }
+            set { name = value; }
 
         }
-        public int Idusers
+        public int Length
         {
-            get { return idusers; }
-            set { idusers = value; }
+            get { return length; }
+            set { length = value; }
 
         }
-        public string Namerequest
+        public int Width
         {
-            get { return namerequest; }
-            set { namerequest = value; }
+            get { return width; }
+            set { width = value; }
 
         }
-        public int Idsroki
+        public int Colstr
         {
-            get { return idsroki; }
-            set { idsroki = value; }
+            get { return colstr; }
+            set { colstr = value; }
 
         }
-        public int Nshop
+        public int Colotp
         {
-            get { return nshop; }
-            set { nshop = value; }
+            get { return colotp; }
+            set { colotp = value;
+                OnPropertyChanged("Count");
+                OnPropertyChanged("Kvadr");
+            }
 
         }
-        public DateTime Datepriem
+        public int Count
         {
-            get { return datepriem; }
-            set { datepriem = value; }
+            get { return colstr * colotp; }
 
         }
-        public DateTime Datedostav
+        public int Fill
         {
-            get { return datedostav; }
-            set { datedostav = value; }
+            get { return fill; }
+            set { fill = value; }
 
         }
-        public DateTime Dateclose
+        public double Kvadr
         {
-            get { return dateclose; }
-            set { dateclose = value; }
+            get { return ((length*width*count)); }
 
         }
-        public DateTime Dateplanov
+
+        public int Idrequest
         {
-            get { return dateplanov; }
-            set { dateplanov = value; }
+            get { return idrequest; }
+            set { idrequest = value; }
 
         }
-        public int Numbertruck
-        {
-            get { return numbertruck; }
-            set { numbertruck = value; }
 
-        }
         public Maket() { }
 
-        public Maket(int idRS, int idusers, string namerequest, int idsroki, int nshop, DateTime datepriem, DateTime datedostav, DateTime dateclose, DateTime dateplanov, int numbertruck)
+        public Maket(string name, int length, int width, int colstr, int colotp, int fill, int idrequest)
         {
-            this.idRS = idRS;
-            this.idusers = idusers;
-            this.namerequest = namerequest;
-            this.idsroki = idsroki;
-            this.nshop = nshop;
-            this.datepriem = datepriem;
-            this.dateclose = dateclose;
-            this.dateplanov = dateplanov;
-            this.numbertruck = numbertruck;
-   
+            this.name = name;
+            this.length = length;
+            this.width = width;
+            this.colstr = colstr;
+            this.colotp = colotp;
+            this.count = colstr*colotp;
+            this.fill = fill;
+            this.kvadr = ((length*width));
+            this.idrequest = idrequest;
+
         }
 
     }

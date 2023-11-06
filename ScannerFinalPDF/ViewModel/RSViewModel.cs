@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,18 +24,11 @@ namespace ScannerFinalPDF.ViewModel
 
         public string Emailch;
         public int RSTch;
-        public RSViewModel(TextBlock emailch, TextBlock rSTch)
+        public RSViewModel(string emailch, string rSTch)
         {
-            if (emailch.Text == "Введите email")
-            { 
-            
-            }
-            else
-            {
-                Emailch = emailch.Text;
-                RSTch = Convert.ToInt32(rSTch.Text);
-            }
             db = new ApplicationContext();
+            Emailch = emailch;
+            RSTch = Convert.ToInt32(rSTch);
         }
 
         public ICommand AddRsB
