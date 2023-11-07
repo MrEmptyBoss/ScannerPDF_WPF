@@ -27,7 +27,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Введите ТК" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="507,62,653,436"/>
-            <TextBox Height="25" Margin="507,89,653,406"/>
+            <TextBox x:Name="Nshop_TextBlock" Height="25" Margin="507,89,653,406"/>
             <TextBlock Text="Выбрать срочность заявки" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="668,62,370,436"/>
             <ComboBox Height="25" Margin="668,89,370,406" ItemsSource="{Binding sroki}"  SelectedItem="{Binding SelectedSroki}">
                 <ComboBox.ItemTemplate>
@@ -44,6 +44,7 @@
             </ComboBox>
             <TextBlock Text="Загрузить макеты" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,132,692,366"/>
             <TextBlock Text="Для составлении таблицы с макетами вам нужно, &#10;выбрать папку с макетами, для одной заявки одна папка" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,160,613,330" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock x:Name="red_text" Text="Можете редактирировать кол-во отпечатков!" FontSize="16" FontWeight="Regular" FontFamily="OpenSans" Margin="585,234,352,260" Foreground="#D31D3E" Opacity="0"/>
             <Button Height="30" Width="180" Background="Transparent" Margin="347,200,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding CreateZayvBtn}">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -92,7 +93,7 @@
                     <DataGridTextColumn Header="ID req" Width="50" Visibility="Hidden" Binding="{Binding Path=Idrequest}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Height="30" Width="180" Background="Transparent" Margin="730,468,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding GetRowInfoBtn}">
+            <Button Height="30" Width="180" Background="Transparent" Margin="730,468,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding GetFillesBtn}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="OverridesDefaultStyle" Value="True"/>

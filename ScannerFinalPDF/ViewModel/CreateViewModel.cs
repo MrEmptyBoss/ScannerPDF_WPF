@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
 using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.Model.Scanner;
 using ScannerFinalPDF.View;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace ScannerFinalPDF.ViewModel
         private Sroki selectedSroki;
         AlertPush alert;
         public DataGrid data_table_zayv_prot;
+        public TextBlock Red_Text;
+        public List<Maket> scanner_Maket;
+        public TextBox nshop_TextBlock;
+
         public ObservableCollection<Maket> FilesP { get; set; } = new ObservableCollection<Maket>();
         public Maket SelectedFileP { get; set; }
 
@@ -40,7 +45,7 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public CreateViewModel(DataGrid data_table_zayv)
+        public CreateViewModel(DataGrid data_table_zayv, TextBlock red_text, TextBox Nshop_TextBlock)
         {
             db = new ApplicationContext();
             db.RS.Load();
@@ -48,24 +53,41 @@ namespace ScannerFinalPDF.ViewModel
             RsSp = db.RS.Local;
             sroki = db.Sroki.Local;
             data_table_zayv_prot = data_table_zayv;
-            FilesP.Add(new Maket("xxx", 111, 121, 12, 1, 14, 0));
-            FilesP.Add(new Maket("xx", 11, 12, 1, 1, 1, 0));
-            FilesP.Add(new Maket("x", 1, 1, 93, 1, 14, 0));
-
+            Red_Text = red_text;
+            nshop_TextBlock = Nshop_TextBlock;
 
         }
 
-        public ICommand GetRowInfoBtn
+        public ICommand GetFillesBtn
         {
             get
             {
-                return new RelayCommand(() => GetRowInfo());
+                return new RelayCommand(() => GetFilles());
             }
         }
-        private void GetRowInfo()
+        private void GetFilles()
         {
-            if (SelectedFileP != null)
-                MessageBox.Show($"кв: {SelectedFileP.Kvadr}\nИтого: {SelectedFileP.Count}");
+           if (data_table_zayv_prot.ItemsSource != null)
+            {
+                Zayvka zayvka = new Zayvka();
+                zayvka.Idsotr = 1;
+                zayvka.IdRS = selectedRs.id;
+                zayvka.Namerequest = $"SC-{zayvka.id}";
+                zayvka.Idsroki = selectedSroki.id;
+                zayvka.Nshop = Convert.ToInt32(nshop_TextBlock.Text);
+                zayvka.Datepriem = DateTime.Now;
+                DateTime datenow = DateTime.Now;
+                zayvka.Dateplanov = datenow.AddDays(selectedSroki.Coldn);
+                db.Zayvka.Add(zayvka);
+                db.SaveChanges();
+                for (int i = 0; i < scanner_Maket.Count; i++)
+                {
+                    scanner_Maket[i].Kvadr = Convert.ToDouble((Convert.ToDouble(scanner_Maket[i].Length) * Convert.ToDouble(scanner_Maket[i].Width) * Convert.ToDouble(scanner_Maket[i].Count))/1000000.0);
+                    scanner_Maket[i].Idrequest = zayvka.id;
+                    db.Maket.Add(scanner_Maket[i]);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public RS SelectedRS
@@ -101,8 +123,17 @@ namespace ScannerFinalPDF.ViewModel
             string pt = openDialog();
             if (pt != null)
             {
-              
-                data_table_zayv_prot.Visibility = System.Windows.Visibility.Visible;
+                if(scanner_Maket != null)
+                {
+                    scanner_Maket.Clear();
+                }
+                alert = new AlertPush("Идет сканирование, пожалуйста подождите");
+                alert.Show();
+                Scanner_Filles scanner_Filles = new Scanner_Filles();
+                scanner_Maket = scanner_Filles.InfoFiles(pt);
+                data_table_zayv_prot.ItemsSource = scanner_Maket;
+                data_table_zayv_prot.Visibility = Visibility.Visible;
+                Red_Text.Opacity = 1;
 
             }
             else
@@ -131,5 +162,7 @@ namespace ScannerFinalPDF.ViewModel
             }
                 return fp;
         }
+
+       
     }
 }

@@ -50,14 +50,13 @@ namespace ScannerFinalPDF.Model.Data
             get { return colotp; }
             set { colotp = value;
                 OnPropertyChanged("Count");
-                OnPropertyChanged("Kvadr");
             }
 
         }
         public int Count
         {
-            get { return colstr * colotp; }
-
+            get { return colstr* colotp; }
+            set { count = colstr * colotp; }
         }
         public int Fill
         {
@@ -67,7 +66,8 @@ namespace ScannerFinalPDF.Model.Data
         }
         public double Kvadr
         {
-            get { return ((length*width*count)); }
+            get { return kvadr; }
+            set { kvadr = value; }
 
         }
 
@@ -80,7 +80,7 @@ namespace ScannerFinalPDF.Model.Data
 
         public Maket() { }
 
-        public Maket(string name, int length, int width, int colstr, int colotp, int fill, int idrequest)
+        public Maket(string name, int length, int width, int colstr, int colotp, int fill, double kvadr, int idrequest)
         {
             this.name = name;
             this.length = length;
@@ -89,7 +89,7 @@ namespace ScannerFinalPDF.Model.Data
             this.colotp = colotp;
             this.count = colstr*colotp;
             this.fill = fill;
-            this.kvadr = ((length*width));
+            this.kvadr = kvadr;
             this.idrequest = idrequest;
 
         }

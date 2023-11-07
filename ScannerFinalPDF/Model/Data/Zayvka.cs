@@ -21,6 +21,7 @@ namespace ScannerFinalPDF.Model.Data
         private DateTime dateclose;
         private DateTime dateplanov;
         private int numbertruck;
+        private int idsotr;
 
         public int IdRS
         {
@@ -82,9 +83,15 @@ namespace ScannerFinalPDF.Model.Data
             set { numbertruck = value; }
 
         }
+        public int Idsotr
+        {
+            get { return idsotr; }
+            set { idsotr = value; }
+
+        }
         public Zayvka() { }
 
-        public Zayvka(int idRS, int idusers, string namerequest, int idsroki, int nshop, DateTime datepriem, DateTime datedostav, DateTime dateclose, DateTime dateplanov, int numbertruck)
+        public Zayvka(int idRS, int idusers, string namerequest, int idsroki, int nshop, DateTime datepriem, DateTime datedostav, DateTime dateclose, DateTime dateplanov, int numbertruck, int idsotr)
         {
             this.idRS = idRS;
             this.idusers = idusers;
@@ -95,6 +102,7 @@ namespace ScannerFinalPDF.Model.Data
             this.dateclose = dateclose;
             this.dateplanov = dateplanov;
             this.numbertruck = numbertruck;
+            this.idsotr = idsotr;
    
         }
 
