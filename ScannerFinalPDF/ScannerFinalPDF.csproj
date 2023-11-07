@@ -207,6 +207,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Data\ApplicationContext.cs" />
+    <Compile Include="Model\Data\DataWorker.cs" />
     <Compile Include="Model\Data\Maket.cs" />
     <Compile Include="Model\Scanner\Scanner_Filles.cs" />
     <Compile Include="Model\Data\Zayvka.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModel\RSViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelControlPanel.cs" />
+    <Compile Include="ViewModel\ZayvkiViewModel.cs" />
     <Compile Include="View\AlertPush.xaml.cs">
       <DependentUpon>AlertPush.xaml</DependentUpon>
     </Compile>
@@ -231,6 +233,9 @@
     </Compile>
     <Compile Include="View\Pages\CreateZayvka.xaml.cs">
       <DependentUpon>CreateZayvka.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\MainZayvki.xaml.cs">
+      <DependentUpon>MainZayvki.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
@@ -273,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\CreateZayvka.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\MainZayvki.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

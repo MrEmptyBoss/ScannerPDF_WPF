@@ -183,7 +183,7 @@
                         </Image.Style>
                     </Image>
                 </Button>
-                <Button x:Name="OpenZB" Height="30" Width="135" Background="Transparent" Margin="13,0,0,0">
+                <Button x:Name="OpenZB" Height="30" Width="135" Background="Transparent" Margin="13,0,0,0" Command="{Binding OpenMainZayvok}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>

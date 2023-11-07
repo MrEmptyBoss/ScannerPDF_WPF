@@ -78,6 +78,7 @@ namespace ScannerFinalPDF.ViewModel
                 zayvka.Datepriem = DateTime.Now;
                 DateTime datenow = DateTime.Now;
                 zayvka.Dateplanov = datenow.AddDays(selectedSroki.Coldn);
+                zayvka.Status = "Новая заявка";
                 db.Zayvka.Add(zayvka);
                 db.SaveChanges();
                 for (int i = 0; i < scanner_Maket.Count; i++)

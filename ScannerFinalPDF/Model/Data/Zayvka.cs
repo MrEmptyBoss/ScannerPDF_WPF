@@ -1,6 +1,7 @@
 ﻿using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,23 @@ namespace ScannerFinalPDF.Model.Data
         private DateTime dateplanov;
         private int numbertruck;
         private int idsotr;
+        private string status;
+
+        public RS ZayvkaRS
+        {
+            get
+            {
+                return DataWorker.GetRSid(idRS);
+            }
+        }
+        public Sroki ZayvkaSroki
+        {
+            get
+            {
+                return DataWorker.GetSrokiId(idsroki);
+            }
+        }
+
 
         public int IdRS
         {
@@ -89,9 +107,16 @@ namespace ScannerFinalPDF.Model.Data
             set { idsotr = value; }
 
         }
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+
+        }
         public Zayvka() { }
 
-        public Zayvka(int idRS, int idusers, string namerequest, int idsroki, int nshop, DateTime datepriem, DateTime datedostav, DateTime dateclose, DateTime dateplanov, int numbertruck, int idsotr)
+        public Zayvka(int idRS, int idusers, string namerequest, int idsroki, int nshop, DateTime datepriem, DateTime datedostav, DateTime dateclose, DateTime dateplanov, int numbertruck, int idsotr, string status)
         {
             this.idRS = idRS;
             this.idusers = idusers;
@@ -103,7 +128,7 @@ namespace ScannerFinalPDF.Model.Data
             this.dateplanov = dateplanov;
             this.numbertruck = numbertruck;
             this.idsotr = idsotr;
-   
+            this.status = status;
         }
 
     }
