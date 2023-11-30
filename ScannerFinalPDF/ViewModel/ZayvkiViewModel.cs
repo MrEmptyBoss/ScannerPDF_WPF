@@ -26,6 +26,7 @@ namespace ScannerFinalPDF.ViewModel
         public DataGrid data_table_zayv_prot;
 
         public ObservableCollection<Zayvka> ZayvkaP { get; set; }
+        public ObservableCollection<Zayvka> Zayvkatemp = new ObservableCollection<Zayvka>();
         public Zayvka selectedZayvkaP { get; set; }
         public ZayvkiViewModel(DataGrid data_table_zayv)
         {
@@ -44,7 +45,83 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
+        public ICommand OpenInfoAllZBtn
+        {
+            get
+            {
+                return new RelayCommand(() => OpenInfoAllZ());
+            }
+        }
+
+        public ICommand OpenInfoVrabZBtn
+        {
+            get
+            {
+                return new RelayCommand(() => OpenInfoVrabZ());
+            }
+        }
+
+        public ICommand OpenInfoNeVrabZBtn
+        {
+            get
+            {
+                return new RelayCommand(() => OpenInfoNeVrabZ());
+            }
+        }
+
+        public ICommand OpenInfoZaverZBtn
+        {
+            get
+            {
+                return new RelayCommand(() => OpenInfoZaverZ());
+            }
+        }
+
+        public ICommand OpenInfoOtmZBtn
+        {
+            get
+            {
+                return new RelayCommand(() => OpenInfoOtmZ());
+            }
+        }
+
         private void OpenInfoZ()
+        {
+            if (selectedZayvkaP != null)
+                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+        }
+
+        private void OpenInfoAllZ()
+        {
+            db.Zayvka.Load();
+            ZayvkaP = db.Zayvka.Local;
+            
+        }
+        private void OpenInfoVrabZ()
+        {
+            Zayvkatemp.Clear();
+            db.Zayvka.Load();
+            var zayvkas = db.Zayvka.Local.Where(z => z.Status == "В работе");
+            foreach(var zayvk in zayvkas)
+            {
+                Zayvkatemp.Add(zayvk);
+            }
+            ZayvkaP = Zayvkatemp;
+          
+
+
+        }
+        private void OpenInfoNeVrabZ()
+        {
+            if (selectedZayvkaP != null)
+                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+        }
+        private void OpenInfoZaverZ()
+        {
+            if (selectedZayvkaP != null)
+                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+        }
+        private void OpenInfoOtmZ()
         {
             if (selectedZayvkaP != null)
                 MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));

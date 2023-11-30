@@ -27,6 +27,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Введите ТК" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="507,62,653,436"/>
+            <TextBlock Text="Напишите комментарий к заявке" FontSize="16" FontWeight="Bold" FontFamily="OpenSans" Margin="668,132,343,366"/>
             <TextBox x:Name="Nshop_TextBlock" Height="25" Margin="507,89,653,406"/>
             <TextBlock Text="Выбрать срочность заявки" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="668,62,370,436"/>
             <ComboBox Height="25" Margin="668,89,370,406" ItemsSource="{Binding sroki}"  SelectedItem="{Binding SelectedSroki}">
@@ -43,7 +44,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Text="Загрузить макеты" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="347,132,692,366"/>
-            <TextBlock Text="Для составлении таблицы с макетами вам нужно, &#10;выбрать папку с макетами, для одной заявки одна папка" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,160,613,330" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock Text="Для составлении таблицы с макетами вам нужно, &#10;выбрать папку с макетами, для одной заявки одна папка" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="347,160,615,330" Foreground="#2D2D2D" Opacity="0.5"/>
             <TextBlock x:Name="red_text" Text="Можете редактирировать кол-во отпечатков!" FontSize="16" FontWeight="Regular" FontFamily="OpenSans" Margin="585,234,352,260" Foreground="#D31D3E" Opacity="0"/>
             <Button Height="30" Width="180" Background="Transparent" Margin="347,200,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding CreateZayvBtn}">
                 <Button.Style>
@@ -127,6 +128,7 @@
                     </Image.Style>
                 </Image>
             </Button>
+            <RichTextBox x:Name="CommentZayvki" Margin="670,159,352,291"/>
         </Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="18"/>

@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="556" d:DesignWidth="1280"
       Title="MainZayvki"
-      Background="#E8EFFF">
+      Background="#E8EFFF"
+      Name="ThisWindow">
 
     <Grid>
         <Grid Name="MainContent" Grid.Row="1">
@@ -17,11 +18,11 @@
                 </Border.Effect>
                 <StackPanel Width="1244" Height="36" HorizontalAlignment="Left" Orientation="Horizontal">
                     <TextBlock Text="Новые заявки: 2" FontSize="14" FontFamily="OpenSans" Foreground="#2D2D2D" Margin="13,10,0,0" Width="109" HorizontalAlignment="Left"/>
-                    <Button Content="Все обращения" Width="160" HorizontalAlignment="Left" Margin="110,0,0,0"/>
-                    <Button Content="В работе" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-                    <Button Content="Не в работе" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-                    <Button Content="Завершено" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-                    <Button Content="Отменено" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <Button Content="Все обращения" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoAllZBtn}" Width="160" HorizontalAlignment="Left" Margin="110,0,0,0"/>
+                    <Button Content="В работе" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoVrabZBtn}" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <Button Content="Не в работе" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoZBtn}" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <Button Content="Завершено" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoZBtn}" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                    <Button Content="Отменено" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoZBtn}" Width="160" HorizontalAlignment="Left" Margin="0,0,0,0"/>
                     <TextBox Text="Поиск.." Width="170" Height="24" Margin="30,0,0,0" BorderThickness="1" TextAlignment="Left" VerticalContentAlignment="Center"/>
 
                 </StackPanel>
@@ -37,7 +38,7 @@
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Открыть" Command="{Binding OpenInfoZBtn}" Height="20" Width="50"/>
+                                <Button Content="Открыть" Command="{Binding ElementName=ThisWindow, Path=DataContext.OpenInfoZBtn}" Height="20" Width="50"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

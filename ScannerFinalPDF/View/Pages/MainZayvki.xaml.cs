@@ -25,6 +25,7 @@ namespace ScannerFinalPDF.View.Pages
         {
             InitializeComponent();
             DataContext = new ZayvkiViewModel(data_table_zayv);
+           
         }
     }
 }

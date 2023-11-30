@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using static System.Net.WebRequestMethods;
 
@@ -28,12 +29,15 @@ namespace ScannerFinalPDF.ViewModel
         public TextBlock Red_Text;
         public List<Maket> scanner_Maket;
         public TextBox nshop_TextBlock;
+        public RichTextBox CommentZayvki;
 
         public ObservableCollection<Maket> FilesP { get; set; } = new ObservableCollection<Maket>();
         public Maket SelectedFileP { get; set; }
 
         private ObservableCollection<RS> selectedRSs;
         public ObservableCollection<Sroki> sroki { get; set; }
+        public ObservableCollection<Zayvka> Zayvkii { get; set; }
+
 
         public ObservableCollection<RS> RsSp
         {
@@ -45,7 +49,7 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public CreateViewModel(DataGrid data_table_zayv, TextBlock red_text, TextBox Nshop_TextBlock)
+        public CreateViewModel(DataGrid data_table_zayv, TextBlock red_text, TextBox Nshop_TextBlock, RichTextBox commentZayvki) 
         {
             db = new ApplicationContext();
             db.RS.Load();
@@ -55,6 +59,7 @@ namespace ScannerFinalPDF.ViewModel
             data_table_zayv_prot = data_table_zayv;
             Red_Text = red_text;
             nshop_TextBlock = Nshop_TextBlock;
+            CommentZayvki = commentZayvki;
 
         }
 
@@ -69,16 +74,22 @@ namespace ScannerFinalPDF.ViewModel
         {
            if (data_table_zayv_prot.ItemsSource != null)
             {
+                db.Zayvka.Load();
+                Zayvkii = db.Zayvka.Local;
+                int tempid = Zayvkii.Count;
                 Zayvka zayvka = new Zayvka();
+                zayvka.id = tempid+1;
                 zayvka.Idsotr = 1;
                 zayvka.IdRS = selectedRs.id;
-                zayvka.Namerequest = $"SC-{zayvka.id}";
+                zayvka.Namerequest = $"SC-{tempid+1}";
                 zayvka.Idsroki = selectedSroki.id;
                 zayvka.Nshop = Convert.ToInt32(nshop_TextBlock.Text);
                 zayvka.Datepriem = DateTime.Now;
                 DateTime datenow = DateTime.Now;
                 zayvka.Dateplanov = datenow.AddDays(selectedSroki.Coldn);
                 zayvka.Status = "Новая заявка";
+                TextRange textRange = new TextRange(CommentZayvki.Document.ContentStart, CommentZayvki.Document.ContentEnd);
+                zayvka.Commentz = textRange.Text;
                 db.Zayvka.Add(zayvka);
                 db.SaveChanges();
                 for (int i = 0; i < scanner_Maket.Count; i++)
@@ -88,6 +99,8 @@ namespace ScannerFinalPDF.ViewModel
                     db.Maket.Add(scanner_Maket[i]);
                     db.SaveChanges();
                 }
+                alert = new AlertPush("Заявка отправлена!");
+                alert.Show();
             }
         }
 
