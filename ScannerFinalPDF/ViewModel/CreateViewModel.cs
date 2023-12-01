@@ -9,146 +9,156 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using static System.Net.WebRequestMethods;
 
 namespace ScannerFinalPDF.ViewModel
 {
     class CreateViewModel : ViewModelBase
     {
-        ApplicationContext db;
+        private readonly ApplicationContext db;
         private RS selectedRs;
         private Sroki selectedSroki;
-        AlertPush alert;
-        public DataGrid data_table_zayv_prot;
-        public TextBlock Red_Text;
+        private AlertPush alert;
+
+        public DataGrid DataTableZayvProt { get; set; }
+        public TextBlock RedText { get; set; }
+        public TextBox NshopTextBlock { get; set; }
+        public RichTextBox CommentZayvki { get; set; }
         public List<Maket> scanner_Maket;
-        public TextBox nshop_TextBlock;
-        public RichTextBox CommentZayvki;
 
         public ObservableCollection<Maket> FilesP { get; set; } = new ObservableCollection<Maket>();
         public Maket SelectedFileP { get; set; }
-
-        private ObservableCollection<RS> selectedRSs;
-        public ObservableCollection<Sroki> sroki { get; set; }
-        public ObservableCollection<Zayvka> Zayvkii { get; set; }
-
-
+        public ObservableCollection<Sroki> Sroki { get; set; }
+        private ObservableCollection<RS> rsSp;
+        private ObservableCollection<Zayvka> zayvkii;
+        public static event EventHandler ZayvkaUpdated;
+        private void OnZayvkaUpdated()
+        {
+            ZayvkaUpdated?.Invoke(this, EventArgs.Empty);
+        }
         public ObservableCollection<RS> RsSp
         {
-            get => selectedRSs;
+            get => rsSp;
             set
             {
-                selectedRSs = value;
-                OnPropertyChanged("Rs");
+                rsSp = value;
+                OnPropertyChanged(nameof(RsSp));
             }
         }
 
-        public CreateViewModel(DataGrid data_table_zayv, TextBlock red_text, TextBox Nshop_TextBlock, RichTextBox commentZayvki) 
+        public ObservableCollection<Zayvka> Zayvkii
         {
+            get => zayvkii;
+            set
+            {
+                zayvkii = value;
+                OnPropertyChanged(nameof(Zayvkii));
+                OnZayvkaUpdated();
+            }
+        }
+
+
+        public CreateViewModel(DataGrid dataTableZayv, TextBlock redText, TextBox nshopTextBlock, RichTextBox commentZayvki)
+        {
+
             db = new ApplicationContext();
             db.RS.Load();
             db.Sroki.Load();
             RsSp = db.RS.Local;
-            sroki = db.Sroki.Local;
-            data_table_zayv_prot = data_table_zayv;
-            Red_Text = red_text;
-            nshop_TextBlock = Nshop_TextBlock;
+            Sroki = db.Sroki.Local;
+            DataTableZayvProt = dataTableZayv;
+            RedText = redText;
+            NshopTextBlock = nshopTextBlock;
             CommentZayvki = commentZayvki;
-
+            ViewModelControlPanel.RsUpdated += ViewModelControlPanel_RsUpdated;
         }
 
-        public ICommand GetFillesBtn
+        private void ViewModelControlPanel_RsUpdated(object sender, EventArgs e)
         {
-            get
-            {
-                return new RelayCommand(() => GetFilles());
-            }
+            RsSp = (sender as ViewModelControlPanel)?.Rs;
         }
-        private void GetFilles()
+
+        public ICommand GetFilesBtn => new RelayCommand(() => GetFiles());
+
+        private void GetFiles()
         {
-           if (data_table_zayv_prot.ItemsSource != null)
+            if (DataTableZayvProt.ItemsSource != null)
             {
                 db.Zayvka.Load();
                 Zayvkii = db.Zayvka.Local;
                 int tempid = Zayvkii.Count;
-                Zayvka zayvka = new Zayvka();
-                zayvka.id = tempid+1;
-                zayvka.Idsotr = 1;
-                zayvka.IdRS = selectedRs.id;
-                zayvka.Namerequest = $"SC-{tempid+1}";
-                zayvka.Idsroki = selectedSroki.id;
-                zayvka.Nshop = Convert.ToInt32(nshop_TextBlock.Text);
-                zayvka.Datepriem = DateTime.Now;
-                DateTime datenow = DateTime.Now;
-                zayvka.Dateplanov = datenow.AddDays(selectedSroki.Coldn);
-                zayvka.Status = "Новая заявка";
-                TextRange textRange = new TextRange(CommentZayvki.Document.ContentStart, CommentZayvki.Document.ContentEnd);
-                zayvka.Commentz = textRange.Text;
+                Zayvka zayvka = new Zayvka
+                {
+                    id = tempid + 1,
+                    Idsotr = 1,
+                    IdRS = selectedRs.id,
+                    Namerequest = $"SC-{tempid + 1}",
+                    Idsroki = selectedSroki.id,
+                    Nshop = Convert.ToInt32(NshopTextBlock.Text),
+                    Datepriem = DateTime.Now,
+                    Dateplanov = DateTime.Now.AddDays(selectedSroki.Coldn),
+                    Status = "Новая заявка",
+                    Commentz = new TextRange(CommentZayvki.Document.ContentStart, CommentZayvki.Document.ContentEnd).Text
+                };
                 db.Zayvka.Add(zayvka);
                 db.SaveChanges();
-                for (int i = 0; i < scanner_Maket.Count; i++)
+
+                foreach (var maket in scanner_Maket)
                 {
-                    scanner_Maket[i].Kvadr = Convert.ToDouble((Convert.ToDouble(scanner_Maket[i].Length) * Convert.ToDouble(scanner_Maket[i].Width) * Convert.ToDouble(scanner_Maket[i].Count))/1000000.0);
-                    scanner_Maket[i].Idrequest = zayvka.id;
-                    db.Maket.Add(scanner_Maket[i]);
+                    maket.Kvadr = Convert.ToDouble((Convert.ToDouble(maket.Length) * Convert.ToDouble(maket.Width) * Convert.ToDouble(maket.Count)) / 1000000.0);
+                    maket.Idrequest = zayvka.id;
+                    db.Maket.Add(maket);
                     db.SaveChanges();
                 }
+
                 alert = new AlertPush("Заявка отправлена!");
                 alert.Show();
+
+
             }
         }
 
         public RS SelectedRS
         {
-            get { return selectedRs; }
+            get => selectedRs;
             set
             {
                 selectedRs = value;
-                OnPropertyChanged("SelectedRS");
+                OnPropertyChanged(nameof(SelectedRS));
             }
         }
+
         public Sroki SelectedSroki
         {
-            get { return selectedSroki; }
+            get => selectedSroki;
             set
             {
                 selectedSroki = value;
-                OnPropertyChanged("SelectedSroki");
+                OnPropertyChanged(nameof(SelectedSroki));
             }
         }
 
-        public ICommand CreateZayvBtn
-        {
-            get
-            {
-                return new RelayCommand(() => CreateZayv());
-            }
-        }
+        public ICommand CreateZayvBtn => new RelayCommand(() => CreateZayv());
 
         private void CreateZayv()
         {
-
-            string pt = openDialog();
-            if (pt != null)
+            string folderPath = OpenDialog();
+            if (folderPath != null)
             {
-                if(scanner_Maket != null)
+                if (scanner_Maket != null)
                 {
                     scanner_Maket.Clear();
                 }
                 alert = new AlertPush("Идет сканирование, пожалуйста подождите");
                 alert.Show();
                 Scanner_Filles scanner_Filles = new Scanner_Filles();
-                scanner_Maket = scanner_Filles.InfoFiles(pt);
-                data_table_zayv_prot.ItemsSource = scanner_Maket;
-                data_table_zayv_prot.Visibility = Visibility.Visible;
-                Red_Text.Opacity = 1;
-
+                scanner_Maket = scanner_Filles.InfoFiles(folderPath);
+                DataTableZayvProt.ItemsSource = scanner_Maket;
+                DataTableZayvProt.Visibility = Visibility.Visible;
+                RedText.Opacity = 1;
             }
             else
             {
@@ -157,26 +167,25 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public string openDialog()  // Открытие проводника
+        public string OpenDialog()  // Открытие проводника
         {
-                 string fp = null;
+            string folderPath = null;
 
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                RestoreDirectory = false,
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Folder Selection."
+            };
 
-                openFileDialog.RestoreDirectory = false;
-                openFileDialog.ValidateNames = false;
-                openFileDialog.CheckFileExists = false;
-                openFileDialog.CheckPathExists = true;
-                openFileDialog.FileName = "Folder Selection.";
-                Nullable<bool> result = openFileDialog.ShowDialog();
+            Nullable<bool> result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                string folderPath = Path.GetDirectoryName(openFileDialog.FileName);
-                fp = folderPath;
+                folderPath = Path.GetDirectoryName(openFileDialog.FileName);
             }
-                return fp;
+            return folderPath;
         }
-
-       
     }
 }

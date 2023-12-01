@@ -1,130 +1,118 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
-using Microsoft.Win32;
 using ScannerFinalPDF.Model.Data;
-using ScannerFinalPDF.Model.Scanner;
 using ScannerFinalPDF.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
-using static System.Net.WebRequestMethods;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class ZayvkiViewModel: ViewModelBase
+    class ZayvkiViewModel : ViewModelBase
     {
+        private readonly ApplicationContext db;
+        private AlertPush alert;
 
-        ApplicationContext db;
-        AlertPush alert;
-        public DataGrid data_table_zayv_prot;
+        private ObservableCollection<Zayvka> zayvkaP;
 
-        public ObservableCollection<Zayvka> ZayvkaP { get; set; }
-        public ObservableCollection<Zayvka> Zayvkatemp = new ObservableCollection<Zayvka>();
-        public Zayvka selectedZayvkaP { get; set; }
-        public ZayvkiViewModel(DataGrid data_table_zayv)
+        public ObservableCollection<Zayvka> ZayvkaP
+        {
+            get { return zayvkaP; }
+            set
+            {
+                zayvkaP = value;
+                OnPropertyChanged(nameof(ZayvkaP));
+            }
+        }
+
+        public Zayvka SelectedZayvkaP { get; set; }
+
+        private ICollectionView zayvkaPView;
+
+        public ZayvkiViewModel()
         {
             db = new ApplicationContext();
             db.Zayvka.Load();
-            ZayvkaP = db.Zayvka.Local;
-            data_table_zayv_prot = data_table_zayv;
-
+            ZayvkaP = new ObservableCollection<Zayvka>(db.Zayvka.Local);
+            zayvkaPView = CollectionViewSource.GetDefaultView(ZayvkaP);
+            CreateViewModel.ZayvkaUpdated += ZayvkiViewModel_ZayvkaUpdated;
         }
 
-        public ICommand OpenInfoZBtn
+        private void ZayvkiViewModel_ZayvkaUpdated(object sender, EventArgs e)
         {
-            get
-            {
-                return new RelayCommand(() => OpenInfoZ());
-            }
+            ZayvkaP = (sender as CreateViewModel)?.Zayvkii;
         }
 
-        public ICommand OpenInfoAllZBtn
-        {
-            get
-            {
-                return new RelayCommand(() => OpenInfoAllZ());
-            }
-        }
+        #region Commands
 
-        public ICommand OpenInfoVrabZBtn
-        {
-            get
-            {
-                return new RelayCommand(() => OpenInfoVrabZ());
-            }
-        }
+        public ICommand OpenInfoZBtn => new RelayCommand(OpenInfoZ);
+        public ICommand OpenInfoAllZBtn => new RelayCommand(OpenInfoAllZ);
+        public ICommand OpenInfoVrabZBtn => new RelayCommand(OpenInfoVrabZ);
+        public ICommand OpenInfoNeVrabZBtn => new RelayCommand(OpenInfoNeVrabZ);
+        public ICommand OpenInfoZaverZBtn => new RelayCommand(OpenInfoZaverZ);
+        public ICommand OpenInfoOtmZBtn => new RelayCommand(OpenInfoOtmZ);
 
-        public ICommand OpenInfoNeVrabZBtn
-        {
-            get
-            {
-                return new RelayCommand(() => OpenInfoNeVrabZ());
-            }
-        }
-
-        public ICommand OpenInfoZaverZBtn
-        {
-            get
-            {
-                return new RelayCommand(() => OpenInfoZaverZ());
-            }
-        }
-
-        public ICommand OpenInfoOtmZBtn
-        {
-            get
-            {
-                return new RelayCommand(() => OpenInfoOtmZ());
-            }
-        }
+        #endregion
 
         private void OpenInfoZ()
         {
-            if (selectedZayvkaP != null)
-                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+            if (SelectedZayvkaP != null)
+            {
+                //SelectedZayvkaP.Status = "Отменено";
+                //db.SaveChanges();
+                MessageBox.Show("Статус изменен!");
+            }
+                
+        }
+
+        private void UpdateZayvkaCollection(IEnumerable<Zayvka> zayvkaQuery)
+        {
+            ZayvkaP.Clear();
+            foreach (var zayvk in zayvkaQuery)
+            {
+                ZayvkaP.Add(zayvk);
+            }
+
+            // Обновляем ICollectionView
+            zayvkaPView.Refresh();
+
+            // Вызываем событие PropertyChanged
+            OnPropertyChanged(nameof(ZayvkaP));
         }
 
         private void OpenInfoAllZ()
         {
             db.Zayvka.Load();
-            ZayvkaP = db.Zayvka.Local;
-            
+            UpdateZayvkaCollection(db.Zayvka.Local);
         }
+
         private void OpenInfoVrabZ()
         {
-            Zayvkatemp.Clear();
-            db.Zayvka.Load();
             var zayvkas = db.Zayvka.Local.Where(z => z.Status == "В работе");
-            foreach(var zayvk in zayvkas)
-            {
-                Zayvkatemp.Add(zayvk);
-            }
-            ZayvkaP = Zayvkatemp;
-          
-
-
+            UpdateZayvkaCollection(zayvkas);
         }
+
         private void OpenInfoNeVrabZ()
         {
-            if (selectedZayvkaP != null)
-                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+            var zayvkas = db.Zayvka.Local.Where(z => z.Status == "Не в работе");
+            UpdateZayvkaCollection(zayvkas);
         }
+
         private void OpenInfoZaverZ()
         {
-            if (selectedZayvkaP != null)
-                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+            var zayvkas = db.Zayvka.Local.Where(z => z.Status == "Завершено");
+            UpdateZayvkaCollection(zayvkas);
         }
+
         private void OpenInfoOtmZ()
         {
-            if (selectedZayvkaP != null)
-                MessageBox.Show(Convert.ToString(selectedZayvkaP.Nshop));
+            var zayvkas = db.Zayvka.Local.Where(z => z.Status == "Отменено");
+            UpdateZayvkaCollection(zayvkas);
         }
     }
 }
