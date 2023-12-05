@@ -19,7 +19,6 @@ namespace ScannerFinalPDF.ViewModel
         private AlertPush alert;
 
         private ObservableCollection<Zayvka> zayvkaP;
-
         public ObservableCollection<Zayvka> ZayvkaP
         {
             get { return zayvkaP; }
@@ -40,7 +39,7 @@ namespace ScannerFinalPDF.ViewModel
             db.Zayvka.Load();
             ZayvkaP = new ObservableCollection<Zayvka>(db.Zayvka.Local);
             zayvkaPView = CollectionViewSource.GetDefaultView(ZayvkaP);
-            CreateViewModel.ZayvkaUpdated += ZayvkiViewModel_ZayvkaUpdated;
+
         }
 
         private void ZayvkiViewModel_ZayvkaUpdated(object sender, EventArgs e)
@@ -63,9 +62,12 @@ namespace ScannerFinalPDF.ViewModel
         {
             if (SelectedZayvkaP != null)
             {
-                //SelectedZayvkaP.Status = "Отменено";
-                //db.SaveChanges();
+                SelectedZayvkaP.Status = "В работе";
+                db.SaveChanges();
                 MessageBox.Show("Статус изменен!");
+                db.Zayvka.Load();
+                var zayvkas = db.Zayvka.Local;
+                UpdateZayvkaCollection(zayvkas);
             }
                 
         }

@@ -34,11 +34,6 @@ namespace ScannerFinalPDF.ViewModel
         public ObservableCollection<Sroki> Sroki { get; set; }
         private ObservableCollection<RS> rsSp;
         private ObservableCollection<Zayvka> zayvkii;
-        public static event EventHandler ZayvkaUpdated;
-        private void OnZayvkaUpdated()
-        {
-            ZayvkaUpdated?.Invoke(this, EventArgs.Empty);
-        }
         public ObservableCollection<RS> RsSp
         {
             get => rsSp;
@@ -56,7 +51,6 @@ namespace ScannerFinalPDF.ViewModel
             {
                 zayvkii = value;
                 OnPropertyChanged(nameof(Zayvkii));
-                OnZayvkaUpdated();
             }
         }
 
@@ -73,12 +67,6 @@ namespace ScannerFinalPDF.ViewModel
             RedText = redText;
             NshopTextBlock = nshopTextBlock;
             CommentZayvki = commentZayvki;
-            ViewModelControlPanel.RsUpdated += ViewModelControlPanel_RsUpdated;
-        }
-
-        private void ViewModelControlPanel_RsUpdated(object sender, EventArgs e)
-        {
-            RsSp = (sender as ViewModelControlPanel)?.Rs;
         }
 
         public ICommand GetFilesBtn => new RelayCommand(() => GetFiles());

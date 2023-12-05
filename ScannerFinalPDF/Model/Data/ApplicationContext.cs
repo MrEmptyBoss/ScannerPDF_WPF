@@ -18,9 +18,9 @@ namespace ScannerFinalPDF.Model.Data
 
 
 
-
-
         public ApplicationContext() : base("DefaultConnection") { }
+
 
     }
 }
+

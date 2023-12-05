@@ -217,7 +217,7 @@
                         </Image.Style>
                     </Image>
                 </Button>
-                <Button x:Name="ZakrB" Height="30" Width="144" Background="Transparent" Margin="18,0,0,0">
+                <Button x:Name="ZakrB" Height="30" Width="144" Background="Transparent" Margin="18,0,0,0" Command="{Binding OpenZakrZayvok}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>

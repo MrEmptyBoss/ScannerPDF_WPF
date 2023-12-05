@@ -18,8 +18,6 @@ namespace ScannerFinalPDF.ViewModel
         private ApplicationContext db;
         private RS selectedRs;
         private ObservableCollection<RS> selectedRSs;
-        public static event EventHandler RsUpdated;
-
 
         public ObservableCollection<RS> Rs
         {
@@ -28,14 +26,9 @@ namespace ScannerFinalPDF.ViewModel
             {
                 selectedRSs = value;
                 OnPropertyChanged(nameof(Rs));
-                OnRsUpdated();
             }
         }
 
-        private void OnRsUpdated()
-        {
-            RsUpdated?.Invoke(this, EventArgs.Empty);
-        }
 
         public ViewModelControlPanel()
         {

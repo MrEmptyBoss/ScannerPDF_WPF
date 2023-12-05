@@ -36,5 +36,11 @@ namespace ScannerFinalPDF.Model.Data
             }
 
         }
+
+        public static void UpdateModel()
+        {
+            // Логика обновления модели
+            // Например, обновление списка данных и т.д.
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.View.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace ScannerFinalPDF.ViewModel
         private Page ControlPanel;
         private Page CreateZayvok;
         private Page MainZayvok;
+        private Page CloseRequest;
 
 
 
@@ -39,6 +42,7 @@ namespace ScannerFinalPDF.ViewModel
             ControlPanel = new View.Pages.ControlPanel();
             CreateZayvok = new View.Pages.CreateZayvka();
             MainZayvok = new View.Pages.MainZayvki();
+            CloseRequest = new View.Pages.CloseRequest();
 
 
 
@@ -49,7 +53,7 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = ControlPanel);
+                return new RelayCommand(() => ChangePage(ControlPanel));
             }
         }
 
@@ -57,14 +61,22 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = MainZayvok);
+                return new RelayCommand(() => ChangePage(MainZayvok));
+            }
+        }
+
+        public ICommand OpenZakrZayvok
+        {
+            get
+            {
+                return new RelayCommand(() => ChangePage(CloseRequest));
             }
         }
         public ICommand OpenProfile
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = Profile);
+                return new RelayCommand(() => ChangePage(Profile));
             }
         }
 
@@ -72,7 +84,7 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = CreateZayvok);
+                return new RelayCommand(() => ChangePage(CreateZayvok));
             }
         }
 
@@ -98,8 +110,16 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => CurrentPage = Welcome);
+                return new RelayCommand(() => ChangePage(Welcome));
             }
+        }
+
+        private void ChangePage(Page newPage)
+        {
+            CurrentPage = newPage;
+
+            // Вызываем метод обновления модели при изменении страницы
+            DataWorker.UpdateModel();
         }
 
 
