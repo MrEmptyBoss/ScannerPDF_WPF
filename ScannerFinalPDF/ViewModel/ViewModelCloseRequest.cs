@@ -18,7 +18,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class ViewModelCloseRequest : ViewModelBase
+    class ViewModelCloseRequest : DataManagerVM
     {
         private readonly ApplicationContext db;
         private RS selectedRs;

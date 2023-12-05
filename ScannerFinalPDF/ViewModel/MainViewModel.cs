@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class MainViewModel : ViewModelBase
+    class MainViewModel : DataManagerVM
     {
         MainWindow main;
         private Page Welcome;
@@ -119,7 +119,7 @@ namespace ScannerFinalPDF.ViewModel
             CurrentPage = newPage;
 
             // Вызываем метод обновления модели при изменении страницы
-            DataWorker.UpdateModel();
+
         }
 
 

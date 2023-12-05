@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class Zayvka: ViewModelBase
+    public class Zayvka
     {
         public int id { get; set; }
 

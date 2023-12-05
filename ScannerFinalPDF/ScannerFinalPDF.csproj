@@ -207,6 +207,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Data\ApplicationContext.cs" />
+    <Compile Include="Model\Data\DataManagerVM.cs" />
     <Compile Include="Model\Data\DataWorker.cs" />
     <Compile Include="Model\Data\Maket.cs" />
     <Compile Include="Model\Scanner\Scanner_Filles.cs" />
@@ -219,7 +220,6 @@
     <Compile Include="ViewModel\CreateViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RSViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCloseRequest.cs" />
     <Compile Include="ViewModel\ViewModelControlPanel.cs" />
     <Compile Include="ViewModel\ZayvkiViewModel.cs" />

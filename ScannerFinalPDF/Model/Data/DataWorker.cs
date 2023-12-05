@@ -8,6 +8,33 @@ namespace ScannerFinalPDF.Model.Data
 {
     class DataWorker
     {
+        //получить все заявки
+        public static List<Zayvka> GetAllZayvka()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var result = db.Zayvka.ToList();
+                return result;
+            }
+        }
+        //получить все РЦ
+        public static List<RS> GetAllrs()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var result = db.RS.ToList();
+                return result;
+            }
+        }
+        //получить все сроки
+        public static List<Sroki> GetAllsroki()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var result = db.Sroki.ToList();
+                return result;
+            }
+        }
 
         public static RS GetRSid(int id)
         {
@@ -35,12 +62,6 @@ namespace ScannerFinalPDF.Model.Data
                 return user;
             }
 
-        }
-
-        public static void UpdateModel()
-        {
-            // Логика обновления модели
-            // Например, обновление списка данных и т.д.
         }
     }
 }
