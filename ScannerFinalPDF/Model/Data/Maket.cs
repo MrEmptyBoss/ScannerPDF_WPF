@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class Maket: ViewModelBase
+    class Maket:DataManagerVM
     {
         public int id { get; set; }
 

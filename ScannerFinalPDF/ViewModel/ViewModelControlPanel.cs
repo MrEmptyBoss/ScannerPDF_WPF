@@ -12,7 +12,7 @@ using ScannerFinalPDF.View.Pages;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class ViewModelControlPanel : ViewModelBase
+    class ViewModelControlPanel : DataManagerVM
     {
         private AlertPush alert;
         private ApplicationContext db;

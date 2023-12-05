@@ -15,7 +15,7 @@ using ScannerFinalPDF.View.Pages;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class AuthViewModel : ViewModelBase
+    class AuthViewModel : DataManagerVM
     {
         MainHome secondForm;
 

@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class CreateViewModel : ViewModelBase
+    class CreateViewModel : DataManagerVM
     {
         private readonly ApplicationContext db;
         private RS selectedRs;

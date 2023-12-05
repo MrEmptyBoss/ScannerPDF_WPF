@@ -13,21 +13,12 @@ using System.Windows.Input;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class ZayvkiViewModel : ViewModelBase
+    class ZayvkiViewModel : DataManagerVM
     {
         private readonly ApplicationContext db;
         private AlertPush alert;
 
-        private ObservableCollection<Zayvka> zayvkaP;
-        public ObservableCollection<Zayvka> ZayvkaP
-        {
-            get { return zayvkaP; }
-            set
-            {
-                zayvkaP = value;
-                OnPropertyChanged(nameof(ZayvkaP));
-            }
-        }
+        private List<Zayvka> temp = DataManagerVM;
 
         public Zayvka SelectedZayvkaP { get; set; }
 

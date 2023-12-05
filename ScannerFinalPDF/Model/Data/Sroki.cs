@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class Sroki
+    public class Sroki
     {
         public int id { get; set; }
         private string name;

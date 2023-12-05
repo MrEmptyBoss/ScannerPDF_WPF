@@ -15,7 +15,7 @@ using ScannerFinalPDF.View;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class RSViewModel : ViewModelBase
+    class RSViewModel : DataManagerVM
     {
         AlertPush alert;
         ApplicationContext db;
