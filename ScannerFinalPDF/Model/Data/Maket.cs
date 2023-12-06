@@ -28,12 +28,11 @@ namespace ScannerFinalPDF.Model.Data
         }
         public int Fill { get; set; }
         public double Kvadr { get; set; }
-        public int? IdRequest { get; set; }
         public virtual Zayvka IdZayvki { get; set; }
 
         public Maket() { }
 
-        public Maket(string name, int length, int width, int colstr, int colotp, int fill, double kvadr, int idRequest)
+        public Maket(string name, int length, int width, int colstr, int colotp, int fill, double kvadr, Zayvka idRequest)
         {
             Name = name;
             Length = length;
@@ -42,7 +41,7 @@ namespace ScannerFinalPDF.Model.Data
             Colotp = colotp;
             Fill = fill;
             Kvadr = kvadr;
-            IdRequest = idRequest;
+            IdZayvki = idRequest;
         }
     }
 }

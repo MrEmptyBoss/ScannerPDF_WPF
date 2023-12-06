@@ -8,21 +8,18 @@ namespace ScannerFinalPDF.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Positions",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Login = table.Column<string>(nullable: true),
-                    Pass = table.Column<string>(nullable: true),
-                    Fio = table.Column<string>(nullable: true),
-                    Position = table.Column<int>(nullable: false),
-                    Date_create = table.Column<DateTime>(nullable: false),
-                    Date_rozh = table.Column<DateTime>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    MaketId = table.Column<int>(nullable: true),
+                    RSId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.PrimaryKey("PK_Positions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,17 +67,46 @@ namespace ScannerFinalPDF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Login = table.Column<string>(nullable: true),
+                    Pass = table.Column<string>(nullable: true),
+                    Fio = table.Column<string>(nullable: true),
+                    PositionId = table.Column<int>(nullable: true),
+                    Date_create = table.Column<DateTime>(nullable: false),
+                    Date_rozh = table.Column<DateTime>(nullable: false),
+                    MaketId = table.Column<int>(nullable: true),
+                    RSId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Users_Positions_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "Positions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Users_RS_RSId",
+                        column: x => x.RSId,
+                        principalTable: "RS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Zayvka",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdRS = table.Column<int>(nullable: false),
                     RsId = table.Column<int>(nullable: true),
-                    IdUsers = table.Column<int>(nullable: false),
                     Usersid = table.Column<int>(nullable: true),
                     NameRequest = table.Column<string>(nullable: true),
-                    IdSroki = table.Column<int>(nullable: false),
                     Srokiid = table.Column<int>(nullable: true),
                     NShop = table.Column<int>(nullable: false),
                     DatePriem = table.Column<DateTime>(nullable: false),
@@ -88,7 +114,6 @@ namespace ScannerFinalPDF.Migrations
                     DateClose = table.Column<DateTime>(nullable: true),
                     DatePlanov = table.Column<DateTime>(nullable: false),
                     NumberTruck = table.Column<int>(nullable: false),
-                    IdSotr = table.Column<int>(nullable: false),
                     Sotrid = table.Column<int>(nullable: true),
                     Status = table.Column<string>(nullable: true),
                     Commentz = table.Column<string>(nullable: true),
@@ -137,7 +162,6 @@ namespace ScannerFinalPDF.Migrations
                     Count = table.Column<int>(nullable: false),
                     Fill = table.Column<int>(nullable: false),
                     Kvadr = table.Column<double>(nullable: false),
-                    IdRequest = table.Column<int>(nullable: true),
                     IdZayvkiId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -157,6 +181,16 @@ namespace ScannerFinalPDF.Migrations
                 column: "IdZayvkiId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Positions_MaketId",
+                table: "Positions",
+                column: "MaketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Positions_RSId",
+                table: "Positions",
+                column: "RSId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RS_MaketId",
                 table: "RS",
                 column: "MaketId");
@@ -174,6 +208,21 @@ namespace ScannerFinalPDF.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Sroki_RSId",
                 table: "Sroki",
+                column: "RSId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_MaketId",
+                table: "Users",
+                column: "MaketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_PositionId",
+                table: "Users",
+                column: "PositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RSId",
+                table: "Users",
                 column: "RSId");
 
             migrationBuilder.CreateIndex(
@@ -202,6 +251,22 @@ namespace ScannerFinalPDF.Migrations
                 column: "Usersid");
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Positions_Maket_MaketId",
+                table: "Positions",
+                column: "MaketId",
+                principalTable: "Maket",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Positions_RS_RSId",
+                table: "Positions",
+                column: "RSId",
+                principalTable: "RS",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_RS_Maket_MaketId",
                 table: "RS",
                 column: "MaketId",
@@ -212,6 +277,14 @@ namespace ScannerFinalPDF.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_Sroki_Maket_MaketId",
                 table: "Sroki",
+                column: "MaketId",
+                principalTable: "Maket",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Users_Maket_MaketId",
+                table: "Users",
                 column: "MaketId",
                 principalTable: "Maket",
                 principalColumn: "Id",
@@ -240,6 +313,9 @@ namespace ScannerFinalPDF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sroki");
+
+            migrationBuilder.DropTable(
+                name: "Positions");
 
             migrationBuilder.DropTable(
                 name: "RS");
