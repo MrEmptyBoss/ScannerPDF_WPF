@@ -15,6 +15,8 @@ namespace ScannerFinalPDF.Model.Data
         public DbSet<Sroki> Sroki { get; set; }
         public DbSet<Zayvka> Zayvka { get; set; }
         public DbSet<Maket> Maket { get; set; }
+        public DbSet<Position> Positions { get; set; }
+
 
 
 

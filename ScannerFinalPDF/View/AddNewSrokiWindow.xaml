@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScannerFinalPDF.View"
         mc:Ignorable="d"
-        Title="AddNewSrokiWindow" Height="300" Width="300">
+        Title="AddNewSrokiWindow" Height="300" Width="300"
+        Name="OpenAddSrokiWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,10 +18,10 @@
                     VerticalAlignment="Center"
                     Width="200">
             <TextBlock Text="Название"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding SrokiName}"/>
             <TextBlock Text="Кол-во дней доставки"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding SrokiColdn}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Добавить срочность"/>
+        <Button Grid.Row="1" Content="Добавить срочность" Command="{Binding AddNewSroki}" CommandParameter="{Binding ElementName=OpenAddSrokiWnd}"/>
     </Grid>
 </Window>

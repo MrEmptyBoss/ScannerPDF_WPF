@@ -31,7 +31,7 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => AuthObr());
+                return new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() => AuthObr());
             }
         }
 
@@ -43,22 +43,23 @@ namespace ScannerFinalPDF.ViewModel
             User authUser = null;
             using(ApplicationContext db = new ApplicationContext())
             {
-                authUser = db.Users.Where(b => b.Login == login && b.Pass == pass).FirstOrDefault();
+                List<User> users = DataWorker.GetAlluser();
+                authUser = users.Where(b => b.Login == login && b.Pass == pass).FirstOrDefault();
             }
             if (authUser != null)
             {
                 secondForm = new MainHome();
                 secondForm.Show();
-                if (authUser.Position == 0)
-                {
+                //if (authUser.Position == 0)
+                //{
                     
 
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                }
+                //}
                 foreach (Window item in Application.Current.Windows)
                 {
                     if (item.DataContext == this) item.Close();

@@ -69,11 +69,11 @@
                 <TabItem.Header>
                     <TextBlock Text="РЦ"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllRS" ItemsSource="{Binding AllRS}">
+                <ListView x:Name="ViewAllRS" ItemsSource="{Binding AllRs}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Название РЦ" Width="100"/>
-                            <GridViewColumn Header="Email" Width="100"/>
+                            <GridViewColumn Header="Название РЦ" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}" Width="100"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -95,15 +95,15 @@
                 <TabItem.Header>
                     <TextBlock Text="Сотрудники"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllSroki}">
+                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllUsers}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Логин" DisplayMemberBinding="{Binding Path=Name}" Width="150"/>
-                            <GridViewColumn Header="Пароль" DisplayMemberBinding="{Binding Path=Positions.Count}" Width="150" />
-                            <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Path=Positions.Count}" Width="150" />
-                            <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Path=Positions.Count}" Width="150" />
-                            <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Path=Positions.Count}" Width="150" />
-                            <GridViewColumn Header="Дата создания учетной записи" DisplayMemberBinding="{Binding Path=Positions.Count}" Width="200" />
+                            <GridViewColumn Header="Логин" DisplayMemberBinding="{Binding Path=Login}" Width="150"/>
+                            <GridViewColumn Header="Пароль" DisplayMemberBinding="{Binding Path=Pass}" Width="150" />
+                            <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Path=Fio}" Width="150" />
+                            <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Path=Date_rozh}" Width="150" />
+                            <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Path=Positions}" Width="150" />
+                            <GridViewColumn Header="Дата создания учетной записи" DisplayMemberBinding="{Binding Path=Date_create}" Width="200" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -112,7 +112,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Должности"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllSroki}">
+                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllPos}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Название должности" DisplayMemberBinding="{Binding Path=Name}" Width="150"/>
@@ -122,11 +122,11 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Создать должность" Command="{Binding OpenAddUserWnd}" Margin="0,10,10,0"/>
+            <Button Content="Создать должность" Command="{Binding OpenAddPositionWnd}" Margin="0,10,10,0"/>
             <Button Content="Создать учетную запись" Command="{Binding OpenAddUserWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать новую срочность" Command="{Binding OpenAddUserWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать новую РЦ" Command="{Binding OpenAddPosWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать заявку" Command="{Binding OpenAddDepWnd}" Margin="0,10,10,0"/>
+            <Button Content="Создать новую срочность" Command="{Binding OpenAddSrokiWnd}" Margin="0,10,10,0"/>
+            <Button Content="Создать новую РЦ" Command="{Binding OpenAddRsWnd}" Margin="0,10,10,0"/>
+            <Button Content="Создать заявку" Command="{Binding OpenAddZayvkaWnd}" Margin="0,10,10,0"/>
         </StackPanel>
         <Grid.RowDefinitions>
             <RowDefinition Height='30'/>

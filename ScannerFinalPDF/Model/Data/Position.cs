@@ -12,5 +12,10 @@ namespace ScannerFinalPDF.Model.Data
         public string Name { get; set; }
 
         public Position() { }
+        public Position(string name)
+        {
+            Name = name;
+           
+        }
     }
 }

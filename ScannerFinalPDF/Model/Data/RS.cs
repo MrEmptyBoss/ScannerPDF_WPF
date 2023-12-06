@@ -2,31 +2,12 @@
 
 namespace ScannerFinalPDF.Model.Data
 {
-    public class RS : DataManagerVM
+    public class RS 
     {
         public int Id { get; set; }
-        private int name;
-        private string email;
+        public int Name { get; set; }
+        public string Email { get; set; }
 
-        public int Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
 
         public RS() { }
 

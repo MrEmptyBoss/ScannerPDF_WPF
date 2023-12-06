@@ -17,8 +17,8 @@ namespace ScannerFinalPDF.Model.Data
 
         public Sroki(string name, int coldn)
         {
-            this.Name = name;
-            this.Coldn = coldn;
+            Name = name;
+            Coldn = coldn;
         }
     }
 }

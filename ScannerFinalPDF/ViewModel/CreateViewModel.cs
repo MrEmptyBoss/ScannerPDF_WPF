@@ -65,7 +65,7 @@ namespace ScannerFinalPDF.ViewModel
             CommentZayvki = commentZayvki;
         }
 
-        public ICommand GetFilesBtn => new RelayCommand(() => GetFiles());
+        public ICommand GetFilesBtn => new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() => GetFiles());
 
         private void GetFiles()
         {
@@ -76,10 +76,9 @@ namespace ScannerFinalPDF.ViewModel
                 Zayvka zayvka = new Zayvka
                 {
                     Id = tempid + 1,
-                    IdSotr = 1,
-                    IdRS = selectedRs.Id,
+                    Rs = selectedRs,
                     NameRequest = $"SC-{tempid + 1}",
-                    IdSroki = selectedSroki.id,
+                    Sroki = selectedSroki,
                     NShop = Convert.ToInt32(NshopTextBlock.Text),
                     DatePriem = DateTime.Now,
                     DatePlanov = DateTime.Now.AddDays(selectedSroki.Coldn),
@@ -92,7 +91,7 @@ namespace ScannerFinalPDF.ViewModel
                 foreach (var maket in scanner_Maket)
                 {
                     maket.Kvadr = Convert.ToDouble((Convert.ToDouble(maket.Length) * Convert.ToDouble(maket.Width) * Convert.ToDouble(maket.Count)) / 1000000.0);
-                    maket.IdRequest = zayvka.Id;
+                    maket.IdZayvki = zayvka;
                     db.Maket.Add(maket);
                     db.SaveChanges();
                 }
@@ -124,7 +123,7 @@ namespace ScannerFinalPDF.ViewModel
             }
         }
 
-        public ICommand CreateZayvBtn => new RelayCommand(() => CreateZayv());
+        public ICommand CreateZayvBtn => new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() => CreateZayv());
 
         private void CreateZayv()
         {

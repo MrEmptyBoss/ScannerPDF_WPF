@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ScannerFinalPDF.Model.Data
 {
@@ -36,6 +37,25 @@ namespace ScannerFinalPDF.Model.Data
                 return result;
             }
         }
+        //получить всех пользователей
+        public static List<User> GetAlluser()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var result = db.Users.ToList();
+                return result;
+            }
+        }
+
+        //получить все должности
+        public static List<Position> GetAllpos()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var result = db.Positions.ToList();
+                return result;
+            }
+        }
 
         public static RS GetRSid(int id)
         {
@@ -63,6 +83,24 @@ namespace ScannerFinalPDF.Model.Data
                 return user;
             }
 
+        }
+
+        public static string CreateSroki(string name, int coldn)
+        {
+            string result = "Уже существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //проверка на сущ отдел
+                bool checkIsExist = db.Sroki.Any(el => el.Name == name);
+                if (!checkIsExist)
+                {
+                    Sroki newSroki = new Sroki { Name = name, Coldn = coldn};
+                    db.Sroki.Add(newSroki);
+                    db.SaveChanges();
+                    result = "Добавлена срочность";
+                }
+                return result;
+            }
         }
     }
 }

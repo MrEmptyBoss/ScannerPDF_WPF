@@ -23,10 +23,23 @@ namespace ScannerFinalPDF.View
     public partial class MainHome : Window
     {
         Window creatingForm;
+        public static ListView AllUsersView;
+        public static ListView AllPositionsView;
+        public static ListView AllRsView;
+        public static ListView AllSrokiView;
+        public static ListView AllZayvkiView;
+
         public MainHome()
         {
             InitializeComponent();
             DataContext = new DataManagerVM();
+            AllUsersView = ViewAllUsers;
+            AllRsView = ViewAllRS;
+            AllSrokiView = ViewAllSroki;
+            AllZayvkiView = ViewAllZayvki;
+            AllPositionsView = ViewAllPositions;
+
+
         }
 
         public Window setCreatingForm
