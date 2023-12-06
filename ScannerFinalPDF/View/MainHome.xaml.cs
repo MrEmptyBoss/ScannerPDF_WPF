@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.Model.ViewModel;
 using ScannerFinalPDF.ViewModel;
 
 namespace ScannerFinalPDF.View
@@ -24,7 +26,7 @@ namespace ScannerFinalPDF.View
         public MainHome()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new DataManagerVM();
         }
 
         public Window setCreatingForm
@@ -49,17 +51,6 @@ namespace ScannerFinalPDF.View
         private void CloseButt_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
-        }
-
-        private void OpenProfile_Click(object sender, RoutedEventArgs e)
-        {
-            if (dialogM.Visibility == Visibility.Hidden)
-            {
-                dialogM.Visibility = Visibility.Visible;
-            }
-
-            else
-                dialogM.Visibility = Visibility.Hidden;
         }
     }
 }

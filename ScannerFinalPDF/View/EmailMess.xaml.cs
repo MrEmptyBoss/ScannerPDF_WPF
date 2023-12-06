@@ -25,7 +25,6 @@ namespace ScannerFinalPDF.View
         public EmailMess(string name, string email)
         {
             InitializeComponent();
-            DataContext = new RSViewModel(email, name);
 
             
         }
