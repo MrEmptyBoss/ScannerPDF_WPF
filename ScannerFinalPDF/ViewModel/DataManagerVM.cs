@@ -1,17 +1,22 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Win32;
 using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.Model.Scanner;
 using ScannerFinalPDF.View;
 using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity.Migrations.Model;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace ScannerFinalPDF.Model.ViewModel
 {
@@ -22,8 +27,7 @@ namespace ScannerFinalPDF.Model.ViewModel
         public List<RS> rs = DataWorker.GetAllrs();
         public List<User> users = DataWorker.GetAlluser();
         public List<Position> positions = DataWorker.GetAllpos();
-
-
+        
         #region Данные
         // свойства срока
         public string SrokiName { get; set; }
@@ -39,6 +43,15 @@ namespace ScannerFinalPDF.Model.ViewModel
         public string FioUser { get; set; }
         public DateTime DateRozhUser { get; set; }
         public Position PositionUser { get; set; }
+        // макеты
+        private List<Maket> scanner_Maket;
+        public Maket SelectedMaket { get; set; }
+        //свойства для заявки
+        public RS SelectedRSZayvka { get; set; }
+        public int NshopZ { get; set; }
+
+        public Sroki SelectedSrokZayvka { get; set ; }
+
         // свойства для выделенных элементов 
         public TabItem SelectedTabItem { get; set; }
         public User SelectedUser { get; set; }
@@ -295,6 +308,7 @@ namespace ScannerFinalPDF.Model.ViewModel
                     {
                         resultStr = DataWorker.DeletePosition(SelectedPos);
                         UpdateAllDataView();
+                        //MessageBox.Show(MainHome.Profile.Fio);
                     }
                     //если РЦ
                     if (SelectedTabItem.Name == "RSTab" && SelectedRs != null)
@@ -392,6 +406,100 @@ namespace ScannerFinalPDF.Model.ViewModel
             MainHome.AllRsView.ItemsSource = AllRs;
             MainHome.AllRsView.Items.Refresh();
         }
+        #endregion
+
+        #region Алгоритм загрузки заявки
+        private RelayCommand openAddZayvkaWnd;
+        public RelayCommand OpenAddZayvkaWnd
+        {
+            get
+            {
+                return openAddZayvkaWnd ?? new RelayCommand(obj =>
+                {
+                    OpenAddZayvkaWindow();
+                });
+            }
+        }
+
+        private void OpenAddZayvkaWindow()
+        {
+            AddNewZayvkaWindow newZayvkaWindow = new AddNewZayvkaWindow();
+            SetCenterPositionAndOpen(newZayvkaWindow);
+        }
+
+        private RelayCommand uploadMaket;
+
+        public RelayCommand UploadMaket
+        {
+            get
+            {
+                return uploadMaket ?? new RelayCommand(obj =>
+                {
+                    string folderPath = OpenDialog();
+                    if (folderPath != null)
+                    {
+                        if (scanner_Maket != null)
+                        {
+                            scanner_Maket.Clear();
+                        }
+                        Scanner_Filles scanner_Filles = new Scanner_Filles();
+                        scanner_Maket = scanner_Filles.InfoFiles(folderPath);
+                        AddNewZayvkaWindow.AllMaketsView.ItemsSource = null;
+                        AddNewZayvkaWindow.AllMaketsView.Items.Clear();
+                        AddNewZayvkaWindow.AllMaketsView.ItemsSource = scanner_Maket;
+                        AddNewZayvkaWindow.Red_Text.Opacity = 1;
+                        AddNewZayvkaWindow.AllMaketsView.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не выбрали папку");
+                    }
+
+                });
+            }
+        }
+
+        private RelayCommand createZayvkaBtn;
+
+        public RelayCommand CreateZayvkaBtn
+        {
+            get
+            {
+                return createZayvkaBtn ?? new RelayCommand(obj =>
+                {
+                    if(scanner_Maket != null)
+                    {
+                        DateTime now = DateTime.Now;
+                        DataWorker.CreateZayvka(SelectedRSZayvka.Id, SelectedSrokZayvka.id, MainHome.Profile.id, NshopZ, now.AddDays(SelectedSrokZayvka.Coldn), new TextRange(AddNewZayvkaWindow.CommentZayvkiR.Document.ContentStart, AddNewZayvkaWindow.CommentZayvkiR.Document.ContentEnd).Text, scanner_Maket);
+                        
+                    }
+
+                });
+            }
+        }
+
+        // открытие проводника
+        public static string OpenDialog()  // Открытие проводника
+        {
+            string folderPath = null;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                RestoreDirectory = false,
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Folder Selection."
+            };
+
+            Nullable<bool> result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                folderPath = Path.GetDirectoryName(openFileDialog.FileName);
+            }
+            return folderPath;
+        }
+
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;
 

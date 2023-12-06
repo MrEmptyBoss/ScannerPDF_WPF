@@ -38,9 +38,6 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<int>("Fill")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdZayvkiId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Kvadr")
                         .HasColumnType("float");
 
@@ -53,9 +50,12 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<int>("Width")
                         .HasColumnType("int");
 
+                    b.Property<int>("ZayvkaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdZayvkiId");
+                    b.HasIndex("ZayvkaId");
 
                     b.ToTable("Maket");
                 });
@@ -171,42 +171,39 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<string>("NameRequest")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberTruck")
+                    b.Property<int?>("NumberTruck")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RsId")
+                    b.Property<int>("RsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Sotrid")
+                    b.Property<int>("SotrId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Srokiid")
+                    b.Property<int>("SrokiId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Usersid")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RsId");
 
-                    b.HasIndex("Sotrid");
+                    b.HasIndex("SotrId");
 
-                    b.HasIndex("Srokiid");
-
-                    b.HasIndex("Usersid");
+                    b.HasIndex("SrokiId");
 
                     b.ToTable("Zayvka");
                 });
 
             modelBuilder.Entity("ScannerFinalPDF.Model.Data.Maket", b =>
                 {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Zayvka", "IdZayvki")
-                        .WithMany()
-                        .HasForeignKey("IdZayvkiId");
+                    b.HasOne("ScannerFinalPDF.Model.Data.Zayvka", "Zayvka")
+                        .WithMany("Makets")
+                        .HasForeignKey("ZayvkaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ScannerFinalPDF.Model.Data.User", b =>
@@ -222,19 +219,21 @@ namespace ScannerFinalPDF.Migrations
                 {
                     b.HasOne("ScannerFinalPDF.Model.Data.RS", "Rs")
                         .WithMany()
-                        .HasForeignKey("RsId");
+                        .HasForeignKey("RsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ScannerFinalPDF.Model.Data.User", "Sotr")
                         .WithMany()
-                        .HasForeignKey("Sotrid");
+                        .HasForeignKey("SotrId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ScannerFinalPDF.Model.Data.Sroki", "Sroki")
                         .WithMany()
-                        .HasForeignKey("Srokiid");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("Usersid");
+                        .HasForeignKey("SrokiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

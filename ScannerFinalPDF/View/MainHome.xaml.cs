@@ -28,6 +28,7 @@ namespace ScannerFinalPDF.View
         public static ListView AllRsView;
         public static ListView AllSrokiView;
         public static ListView AllZayvkiView;
+        public static User Profile;
 
         public MainHome()
         {

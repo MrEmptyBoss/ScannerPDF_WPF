@@ -10,7 +10,7 @@ using ScannerFinalPDF.Model.Data;
 namespace ScannerFinalPDF.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231206093319_Initial")]
+    [Migration("20231206183102_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,9 +40,6 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<int>("Fill")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdZayvkiId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Kvadr")
                         .HasColumnType("float");
 
@@ -55,9 +52,12 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<int>("Width")
                         .HasColumnType("int");
 
+                    b.Property<int>("ZayvkaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdZayvkiId");
+                    b.HasIndex("ZayvkaId");
 
                     b.ToTable("Maket");
                 });
@@ -69,20 +69,10 @@ namespace ScannerFinalPDF.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MaketId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RSId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MaketId");
-
-                    b.HasIndex("RSId");
 
                     b.ToTable("Positions");
                 });
@@ -97,20 +87,10 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MaketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Name")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RSId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MaketId");
-
-                    b.HasIndex("RSId");
 
                     b.ToTable("RS");
                 });
@@ -125,20 +105,10 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<int>("Coldn")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MaketId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RSId")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
-
-                    b.HasIndex("MaketId");
-
-                    b.HasIndex("RSId");
 
                     b.ToTable("Sroki");
                 });
@@ -162,25 +132,15 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MaketId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Pass")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PositionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RSId")
+                    b.Property<int>("PositionId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("MaketId");
-
                     b.HasIndex("PositionId");
-
-                    b.HasIndex("RSId");
 
                     b.ToTable("Users");
                 });
@@ -207,124 +167,75 @@ namespace ScannerFinalPDF.Migrations
                     b.Property<DateTime>("DatePriem")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MaketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("NShop")
                         .HasColumnType("int");
 
                     b.Property<string>("NameRequest")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberTruck")
+                    b.Property<int?>("NumberTruck")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RsId")
+                    b.Property<int>("RsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Sotrid")
+                    b.Property<int>("SotrId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Srokiid")
+                    b.Property<int>("SrokiId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Usersid")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("MaketId");
 
                     b.HasIndex("RsId");
 
-                    b.HasIndex("Sotrid");
+                    b.HasIndex("SotrId");
 
-                    b.HasIndex("Srokiid");
-
-                    b.HasIndex("Usersid");
+                    b.HasIndex("SrokiId");
 
                     b.ToTable("Zayvka");
                 });
 
             modelBuilder.Entity("ScannerFinalPDF.Model.Data.Maket", b =>
                 {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Zayvka", "IdZayvki")
-                        .WithMany()
-                        .HasForeignKey("IdZayvkiId");
-                });
-
-            modelBuilder.Entity("ScannerFinalPDF.Model.Data.Position", b =>
-                {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Maket", null)
-                        .WithMany("AllPos")
-                        .HasForeignKey("MaketId");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.RS", null)
-                        .WithMany("AllPos")
-                        .HasForeignKey("RSId");
-                });
-
-            modelBuilder.Entity("ScannerFinalPDF.Model.Data.RS", b =>
-                {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Maket", null)
-                        .WithMany("AllRs")
-                        .HasForeignKey("MaketId");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.RS", null)
-                        .WithMany("AllRs")
-                        .HasForeignKey("RSId");
-                });
-
-            modelBuilder.Entity("ScannerFinalPDF.Model.Data.Sroki", b =>
-                {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Maket", null)
-                        .WithMany("AllSroki")
-                        .HasForeignKey("MaketId");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.RS", null)
-                        .WithMany("AllSroki")
-                        .HasForeignKey("RSId");
+                    b.HasOne("ScannerFinalPDF.Model.Data.Zayvka", "Zayvka")
+                        .WithMany("Makets")
+                        .HasForeignKey("ZayvkaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ScannerFinalPDF.Model.Data.User", b =>
                 {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Maket", null)
-                        .WithMany("AllUsers")
-                        .HasForeignKey("MaketId");
-
                     b.HasOne("ScannerFinalPDF.Model.Data.Position", "Position")
-                        .WithMany()
-                        .HasForeignKey("PositionId");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.RS", null)
-                        .WithMany("AllUsers")
-                        .HasForeignKey("RSId");
+                        .WithMany("Users")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ScannerFinalPDF.Model.Data.Zayvka", b =>
                 {
-                    b.HasOne("ScannerFinalPDF.Model.Data.Maket", null)
-                        .WithMany("AllZayvki")
-                        .HasForeignKey("MaketId");
-
                     b.HasOne("ScannerFinalPDF.Model.Data.RS", "Rs")
-                        .WithMany("AllZayvki")
-                        .HasForeignKey("RsId");
+                        .WithMany()
+                        .HasForeignKey("RsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ScannerFinalPDF.Model.Data.User", "Sotr")
                         .WithMany()
-                        .HasForeignKey("Sotrid");
+                        .HasForeignKey("SotrId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ScannerFinalPDF.Model.Data.Sroki", "Sroki")
                         .WithMany()
-                        .HasForeignKey("Srokiid");
-
-                    b.HasOne("ScannerFinalPDF.Model.Data.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("Usersid");
+                        .HasForeignKey("SrokiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
