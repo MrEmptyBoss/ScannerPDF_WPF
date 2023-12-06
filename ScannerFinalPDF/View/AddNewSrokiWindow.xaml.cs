@@ -1,5 +1,4 @@
-﻿using ScannerFinalPDF.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ScannerFinalPDF.View.Pages
+namespace ScannerFinalPDF.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainZayvki.xaml
+    /// Логика взаимодействия для AddNewSrokiWindow.xaml
     /// </summary>
-    public partial class MainZayvki : Page
+    public partial class AddNewSrokiWindow : Window
     {
-        public MainZayvki()
+        public AddNewSrokiWindow()
         {
             InitializeComponent();
-            DataContext = new ZayvkiViewModel();
-           
         }
     }
 }

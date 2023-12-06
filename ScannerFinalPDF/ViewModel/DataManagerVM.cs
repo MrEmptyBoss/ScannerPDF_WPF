@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using ScannerFinalPDF.Model.Data;
 using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScannerFinalPDF.Model.Data
+namespace ScannerFinalPDF.Model.ViewModel
 {
     public class DataManagerVM : INotifyPropertyChanged
     {

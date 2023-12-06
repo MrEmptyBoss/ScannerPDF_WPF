@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace ScannerFinalPDF.Model.Data
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                RS rs = db.RS.FirstOrDefault(p => p.id == id);
+                RS rs = db.RS.FirstOrDefault(p => p.Id == id);
                 return rs;
             }
             

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ScannerFinalPDF.Model.Data
 {
@@ -18,7 +18,15 @@ namespace ScannerFinalPDF.Model.Data
 
 
 
-        public ApplicationContext() : base("DefaultConnection") { }
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ScannerPdfDBAppDB;Trusted_Connection=True;");
+        }
 
 
     }

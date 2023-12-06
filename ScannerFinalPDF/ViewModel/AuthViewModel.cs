@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ScannerFinalPDF.View.Pages;
+using ScannerFinalPDF.Model.ViewModel;
 
 namespace ScannerFinalPDF.ViewModel
 {
@@ -48,21 +49,10 @@ namespace ScannerFinalPDF.ViewModel
             {
                 secondForm = new MainHome();
                 secondForm.Show();
-                //исправить!!!!
-                var s = secondForm.OpenProfile.Template;
-                var myTextBlock = (TextBlock)s.FindName("nameuser", secondForm.OpenProfile);
-                myTextBlock.Text = authUser.Fio;
                 if (authUser.Position == 0)
                 {
                     
-                    secondForm.panelupr.Visibility = Visibility.Hidden;
-                    secondForm.paneluprb.Visibility = Visibility.Hidden;
 
-                    secondForm.ZakrB.Visibility = Visibility.Hidden;
-                    secondForm.ZakrZ.Visibility = Visibility.Hidden;
-
-                    secondForm.OpenZB.Visibility = Visibility.Hidden;
-                    secondForm.OpenZ.Visibility = Visibility.Hidden;
 
                 }
                 else

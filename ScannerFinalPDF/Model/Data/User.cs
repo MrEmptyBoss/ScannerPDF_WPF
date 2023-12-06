@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class User
+    public class User
     {
         public int id {  get; set; }
 

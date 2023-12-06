@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class Position
+    public class Position
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-        private string name;
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-
-        }
         public Position() { }
     }
 }

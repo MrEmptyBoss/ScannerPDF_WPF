@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using ScannerFinalPDF.Model.Data;
 using ScannerFinalPDF.Model.Scanner;
+using ScannerFinalPDF.Model.ViewModel;
 using ScannerFinalPDF.View;
 using System;
 using System.Collections.Generic;
@@ -58,11 +59,6 @@ namespace ScannerFinalPDF.ViewModel
         public CreateViewModel(DataGrid dataTableZayv, TextBlock redText, TextBox nshopTextBlock, RichTextBox commentZayvki)
         {
 
-            db = new ApplicationContext();
-            db.RS.Load();
-            db.Sroki.Load();
-            RsSp = db.RS.Local;
-            Sroki = db.Sroki.Local;
             DataTableZayvProt = dataTableZayv;
             RedText = redText;
             NshopTextBlock = nshopTextBlock;
@@ -76,18 +72,17 @@ namespace ScannerFinalPDF.ViewModel
             if (DataTableZayvProt.ItemsSource != null)
             {
                 db.Zayvka.Load();
-                Zayvkii = db.Zayvka.Local;
                 int tempid = Zayvkii.Count;
                 Zayvka zayvka = new Zayvka
                 {
-                    id = tempid + 1,
-                    Idsotr = 1,
-                    IdRS = selectedRs.id,
-                    Namerequest = $"SC-{tempid + 1}",
-                    Idsroki = selectedSroki.id,
-                    Nshop = Convert.ToInt32(NshopTextBlock.Text),
-                    Datepriem = DateTime.Now,
-                    Dateplanov = DateTime.Now.AddDays(selectedSroki.Coldn),
+                    Id = tempid + 1,
+                    IdSotr = 1,
+                    IdRS = selectedRs.Id,
+                    NameRequest = $"SC-{tempid + 1}",
+                    IdSroki = selectedSroki.id,
+                    NShop = Convert.ToInt32(NshopTextBlock.Text),
+                    DatePriem = DateTime.Now,
+                    DatePlanov = DateTime.Now.AddDays(selectedSroki.Coldn),
                     Status = "Новая заявка",
                     Commentz = new TextRange(CommentZayvki.Document.ContentStart, CommentZayvki.Document.ContentEnd).Text
                 };
@@ -97,7 +92,7 @@ namespace ScannerFinalPDF.ViewModel
                 foreach (var maket in scanner_Maket)
                 {
                     maket.Kvadr = Convert.ToDouble((Convert.ToDouble(maket.Length) * Convert.ToDouble(maket.Width) * Convert.ToDouble(maket.Count)) / 1000000.0);
-                    maket.Idrequest = zayvka.id;
+                    maket.IdRequest = zayvka.Id;
                     db.Maket.Add(maket);
                     db.SaveChanges();
                 }
