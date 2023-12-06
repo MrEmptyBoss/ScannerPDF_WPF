@@ -303,6 +303,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\20231206072655_Initial.cs" />
+    <Compile Include="Migrations\20231206072655_Initial.designer.cs">
+      <DependentUpon>20231206072655_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="ViewModel\DataManagerVM.cs" />
     <Compile Include="Model\Data\DataWorker.cs" />

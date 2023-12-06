@@ -28,7 +28,7 @@ namespace ScannerFinalPDF.Model.Data
         }
         public int Fill { get; set; }
         public double Kvadr { get; set; }
-        public int IdRequest { get; set; }
+        public int? IdRequest { get; set; }
         public virtual Zayvka IdZayvki { get; set; }
 
         public Maket() { }

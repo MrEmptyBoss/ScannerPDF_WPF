@@ -15,8 +15,8 @@ namespace ScannerFinalPDF.Model.Data
         public virtual Sroki Sroki { get; set; }
         public int NShop { get; set; }
         public DateTime DatePriem { get; set; }
-        public DateTime DateDostav { get; set; }
-        public DateTime DateClose { get; set; }
+        public DateTime? DateDostav { get; set; }
+        public DateTime? DateClose { get; set; }
         public DateTime DatePlanov { get; set; }
         public int NumberTruck { get; set; }
         public int IdSotr { get; set; }
