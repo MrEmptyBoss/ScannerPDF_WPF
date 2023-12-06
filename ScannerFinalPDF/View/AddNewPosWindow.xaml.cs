@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ScannerFinalPDF.View
 {
     /// <summary>
-    /// Логика взаимодействия для AddNewUserWindow.xaml
+    /// Логика взаимодействия для AddNewPosWindow.xaml
     /// </summary>
-    public partial class AddNewUserWindow : Window
+    public partial class AddNewPosWindow : Window
     {
-        public AddNewUserWindow()
+        public AddNewPosWindow()
         {
             InitializeComponent();
             DataContext = new DataManagerVM();

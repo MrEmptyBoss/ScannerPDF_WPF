@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScannerFinalPDF.View"
         mc:Ignorable="d"
-        Title="AddNewUserWindow" Height="300" Width="300">
+        Title="AddNewUserWindow" Height="300" Width="300"
+        Name="OpenAddUserWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,16 +18,16 @@
                     VerticalAlignment="Center"
                     Width="200">
             <TextBlock Text="Логин"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding LoginUser}"/>
             <TextBlock Text="Пароль"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding PassUser}"/>
             <TextBlock Text="ФИО"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding FioUser}"/>
             <TextBlock Text="Дата рождения"/>
-            <DatePicker/>
+            <DatePicker SelectedDate="{Binding DateRozhUser}"/>
             <TextBlock Text="Должность"/>
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding AllPos}" SelectedItem="{Binding PositionUser}" DisplayMemberPath="Name"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Добавить учетную запись"/>
+        <Button Grid.Row="1" Content="Добавить учетную запись" Command="{Binding AddNewUser}" CommandParameter="{Binding ElementName=OpenAddUserWnd}"/>
     </Grid>
 </Window>

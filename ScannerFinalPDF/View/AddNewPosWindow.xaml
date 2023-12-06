@@ -1,12 +1,12 @@
-﻿<Window x:Class="ScannerFinalPDF.View.AddNewRsWindow"
+﻿<Window x:Class="ScannerFinalPDF.View.AddNewPosWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScannerFinalPDF.View"
         mc:Ignorable="d"
-        Title="AddNewRsWindow" Height="300" Width="300"
-        Name="OpenAddRsWnd">
+        Title="AddNewPosWindow" Height="300" Width="300"
+        Name="OpenAddPosWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,11 +17,9 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="200">
-            <TextBlock Text="Название РЦ"/>
-            <TextBox Text="{Binding NameRS}"/>
-            <TextBlock Text="Email"/>
-            <TextBox Text="{Binding Email}"/>
+            <TextBlock Text="Название должности"/>
+            <TextBox Text="{Binding PosName}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Добавить РЦ" Command="{Binding AddNewRs}" CommandParameter="{Binding ElementName=OpenAddRsWnd}"/>
+        <Button Grid.Row="1" Content="Добавить должность" Command="{Binding AddNewPos}" CommandParameter="{Binding ElementName=OpenAddPosWnd}"/>
     </Grid>
 </Window>

@@ -102,5 +102,59 @@ namespace ScannerFinalPDF.Model.Data
                 return result;
             }
         }
+
+        public static string CreateRs(int name, string email)
+        {
+            string result = "Уже существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //проверка на сущ отдел
+                bool checkIsExist = db.RS.Any(el => el.Email == email);
+                if (!checkIsExist)
+                {
+                    RS newRS = new RS { Name = name, Email = email };
+                    db.RS.Add(newRS);
+                    db.SaveChanges();
+                    result = "Добавлена РЦ";
+                }
+                return result;
+            }
+        }
+
+        public static string CreatePos(string name)
+        {
+            string result = "Уже существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //проверка на сущ отдел
+                bool checkIsExist = db.Positions.Any(el => el.Name == name);
+                if (!checkIsExist)
+                {
+                    Position newPos = new Position { Name = name};
+                    db.Positions.Add(newPos);
+                    db.SaveChanges();
+                    result = "Добавлена должность";
+                }
+                return result;
+            }
+        }
+
+        public static string CreateUser(string login, string pass, string fio, DateTime date_rozh, int positionId)
+        {
+            string result = "Уже существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                //проверка на сущ отдел
+                bool checkIsExist = db.Users.Any(el => el.Login == login);
+                if (!checkIsExist)
+                {
+                    User newUser = new User { Login = login, Pass = pass, Fio = fio, Date_rozh = date_rozh, Date_create = DateTime.Now, PositionId = positionId };
+                    db.Users.Add(newUser);
+                    db.SaveChanges();
+                    result = "Добавлена учетная запись";
+                }
+                return result;
+            }
+        }
     }
 }
