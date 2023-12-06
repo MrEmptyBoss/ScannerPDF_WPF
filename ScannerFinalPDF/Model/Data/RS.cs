@@ -10,11 +10,5 @@ namespace ScannerFinalPDF.Model.Data
 
 
         public RS() { }
-
-        public RS(int name, string email)
-        {
-            Name = name;
-            Email = email;
-        }
     }
 }

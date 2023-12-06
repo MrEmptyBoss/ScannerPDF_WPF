@@ -22,22 +22,5 @@ namespace ScannerFinalPDF.Model.Data
 
 
         public Zayvka() { }
-
-        public Zayvka(RS idRS, User idUsers, string nameRequest, Sroki idSroki, int nShop, DateTime datePriem, DateTime dateDostav, DateTime dateClose, DateTime datePlanov, int numberTruck, User idSotr, string status, string commentz)
-        {
-            Rs = idRS;
-            Users = idUsers;
-            NameRequest = nameRequest;
-            Sroki = idSroki;
-            NShop = nShop;
-            DatePriem = datePriem;
-            DateDostav = dateDostav;
-            DateClose = dateClose;
-            DatePlanov = datePlanov;
-            NumberTruck = numberTruck;
-            Sotr = idSotr;
-            Status = status;
-            Commentz = commentz;
-        }
     }
 }

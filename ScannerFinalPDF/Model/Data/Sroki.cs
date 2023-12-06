@@ -15,10 +15,5 @@ namespace ScannerFinalPDF.Model.Data
 
         public Sroki() { }
 
-        public Sroki(string name, int coldn)
-        {
-            Name = name;
-            Coldn = coldn;
-        }
     }
 }

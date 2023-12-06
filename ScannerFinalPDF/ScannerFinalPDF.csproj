@@ -311,6 +311,10 @@
     <Compile Include="Migrations\20231206111648_Step2.designer.cs">
       <DependentUpon>20231206111648_Step2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231206150108_Step3.cs" />
+    <Compile Include="Migrations\20231206150108_Step3.designer.cs">
+      <DependentUpon>20231206150108_Step3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\RelayCommand.cs" />

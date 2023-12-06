@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace ScannerFinalPDF.Model.ViewModel
 {
@@ -38,6 +39,14 @@ namespace ScannerFinalPDF.Model.ViewModel
         public string FioUser { get; set; }
         public DateTime DateRozhUser { get; set; }
         public Position PositionUser { get; set; }
+        // свойства для выделенных элементов 
+        public TabItem SelectedTabItem { get; set; }
+        public User SelectedUser { get; set; }
+        public Position SelectedPos { get; set; }
+        public Sroki SelectedSrok { get; set; }
+        public RS SelectedRs { get; set; }
+        public Zayvka SelectedZayvka { get; set; }
+
         #endregion
 
 
@@ -266,6 +275,48 @@ namespace ScannerFinalPDF.Model.ViewModel
                         SetNullValuesToProperties();
                         wnd.Close();
                     }
+                });
+            }
+        }
+        #endregion
+
+        #region Удаление из БД
+        private RelayCommand deleteItem;
+
+        public RelayCommand DeleteItem
+        {
+            get
+            {
+                return deleteItem ?? new RelayCommand(obj =>
+                {
+                    string resultStr = "Ничего не выбрано";
+                    //если должность
+                    if(SelectedTabItem.Name == "PositionsTab" && SelectedPos != null)
+                    {
+                        resultStr = DataWorker.DeletePosition(SelectedPos);
+                        UpdateAllDataView();
+                    }
+                    //если РЦ
+                    if (SelectedTabItem.Name == "RSTab" && SelectedRs != null)
+                    {
+                        resultStr = DataWorker.DeleteRs(SelectedRs);
+                        UpdateAllDataView();
+                    }
+                    //если срочность
+                    if (SelectedTabItem.Name == "SrokiTab" && SelectedSrok != null)
+                    {
+                        resultStr = DataWorker.DeleteSrok(SelectedSrok);
+                        UpdateAllDataView();
+                    }
+                    //если сотрудник
+                    if (SelectedTabItem.Name == "UsersTab" && SelectedUser != null)
+                    {
+                        resultStr = DataWorker.DeleteUser(SelectedUser);
+                        UpdateAllDataView();
+                    }
+                    // обновление
+                    SetNullValuesToProperties();
+
                 });
             }
         }

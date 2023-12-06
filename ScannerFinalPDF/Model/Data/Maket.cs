@@ -3,7 +3,7 @@ using System;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    public class Maket : DataManagerVM
+    public class Maket
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace ScannerFinalPDF.Model.Data
             set
             {
                 colotp = value;
-                OnPropertyChanged(nameof(Count));
+                
             }
         }
         public int Count
@@ -32,16 +32,5 @@ namespace ScannerFinalPDF.Model.Data
 
         public Maket() { }
 
-        public Maket(string name, int length, int width, int colstr, int colotp, int fill, double kvadr, Zayvka idRequest)
-        {
-            Name = name;
-            Length = length;
-            Width = width;
-            Colstr = colstr;
-            Colotp = colotp;
-            Fill = fill;
-            Kvadr = kvadr;
-            IdZayvki = idRequest;
-        }
     }
 }

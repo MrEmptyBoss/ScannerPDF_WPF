@@ -47,12 +47,20 @@
                 </Image>
             </StackPanel>
         </Grid>
-        <TabControl Grid.Row="1">
+        <TabControl Grid.Row="1" SelectedItem="{Binding SelectedTabItem}">
             <TabItem Name="Zayvki">
                 <TabItem.Header>
                     <TextBlock Text="Заявки"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllZayvki" ItemsSource="{Binding AllZayvki}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Создать заявку"/>
+                        <MenuItem Header="Одобрить заявку"/>
+                        <MenuItem Header="Закрыть заявку"/>
+                        <MenuItem Header="Отменить заявку"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllZayvki" ItemsSource="{Binding AllZayvki}" SelectedItem="{Binding SelectedZayvka}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Номер заявки" Width="100"/>
@@ -69,7 +77,14 @@
                 <TabItem.Header>
                     <TextBlock Text="РЦ"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllRS" ItemsSource="{Binding AllRs}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Создать РЦ" Command="{Binding OpenAddRsWnd}"/>
+                        <MenuItem Header="Изменить РЦ"/>
+                        <MenuItem Header="Удалить РЦ" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllRS" ItemsSource="{Binding AllRs}" SelectedItem="{Binding SelectedRs}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Название РЦ" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
@@ -82,7 +97,14 @@
                 <TabItem.Header>
                     <TextBlock Text="Сроки срочности"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllSroki" ItemsSource="{Binding AllSroki}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Создать срочность" Command="{Binding OpenAddSrokiWnd}"/>
+                        <MenuItem Header="Изменить срочность"/>
+                        <MenuItem Header="Удалить срочность" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllSroki" ItemsSource="{Binding AllSroki}" SelectedItem="{Binding SelectedSrok}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Название срочности" DisplayMemberBinding="{Binding Path=Name}" Width="150"/>
@@ -95,14 +117,21 @@
                 <TabItem.Header>
                     <TextBlock Text="Сотрудники"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllUsers}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Создать сотрудника" Command="{Binding OpenAddUserWnd}"/>
+                        <MenuItem Header="Изменить данные сотрудника"/>
+                        <MenuItem Header="Удалить сотрудника" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllUsers}" SelectedItem="{Binding SelectedUser}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Логин" DisplayMemberBinding="{Binding Path=Login}" Width="150"/>
                             <GridViewColumn Header="Пароль" DisplayMemberBinding="{Binding Path=Pass}" Width="150" />
                             <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Path=Fio}" Width="150" />
                             <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Path=Date_rozh}" Width="150" />
-                            <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Path=Positions}" Width="150" />
+                            <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Path=UserPosition.Name}" Width="150" />
                             <GridViewColumn Header="Дата создания учетной записи" DisplayMemberBinding="{Binding Path=Date_create}" Width="200" />
                         </GridView>
                     </ListView.View>
@@ -112,7 +141,14 @@
                 <TabItem.Header>
                     <TextBlock Text="Должности"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllPos}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Создать должность" Command="{Binding OpenAddPosWnd}"/>
+                        <MenuItem Header="Изменить должность"/>
+                        <MenuItem Header="Удалить должность" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllPos}" SelectedItem="{Binding SelectedPos}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Название должности" DisplayMemberBinding="{Binding Path=Name}" Width="150"/>
@@ -122,10 +158,6 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Создать должность" Command="{Binding OpenAddPosWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать учетную запись" Command="{Binding OpenAddUserWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать новую срочность" Command="{Binding OpenAddSrokiWnd}" Margin="0,10,10,0"/>
-            <Button Content="Создать новую РЦ" Command="{Binding OpenAddRsWnd}" Margin="0,10,10,0"/>
             <Button Content="Создать заявку" Command="{Binding OpenAddZayvkaWnd}" Margin="0,10,10,0"/>
         </StackPanel>
         <Grid.RowDefinitions>

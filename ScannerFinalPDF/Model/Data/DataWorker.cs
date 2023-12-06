@@ -75,6 +75,16 @@ namespace ScannerFinalPDF.Model.Data
             }
 
         }
+
+        public static Position GetPosId(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Position pos = db.Positions.FirstOrDefault(p => p.Id == id);
+                return pos;
+            }
+
+        }
         public static User GetUserId(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -156,5 +166,54 @@ namespace ScannerFinalPDF.Model.Data
                 return result;
             }
         }
+
+        public static string DeletePosition(Position position)
+        {
+            string result = "Такой должности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+               db.Positions.Remove(position);
+               db.SaveChanges();
+               result = $"Удалена должность {position.Name}";
+            }
+            return result;
+        }
+
+        public static string DeleteRs(RS Rs)
+        {
+            string result = "Такой должности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.RS.Remove(Rs);
+                db.SaveChanges();
+                result = $"Удален РЦ {Rs.Name}";
+            }
+            return result;
+        }
+
+        public static string DeleteSrok(Sroki srok)
+        {
+            string result = "Такой срочности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Sroki.Remove(srok);
+                db.SaveChanges();
+                result = $"Удалена срочность {srok.Name}";
+            }
+            return result;
+        }
+
+        public static string DeleteUser(User user)
+        {
+            string result = "Такого сотрудника не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+                result = $"Удален сотрудник {user.Fio}";
+            }
+            return result;
+        }
+
     }
 }
