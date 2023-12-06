@@ -24,8 +24,20 @@ namespace ScannerFinalPDF.Model.ViewModel
 
 
         #region Данные
+        // свойства срока
         public string SrokiName { get; set; }
         public int SrokiColdn { get; set; }
+        // свойства РЦ
+        public int NameRS { get; set; }
+        public string Email { get; set; }
+        // свойства должности
+        public string PosName { get; set; }
+        //  свойства пользователя
+        public string LoginUser { get; set; }
+        public string PassUser { get; set; }
+        public string FioUser { get; set; }
+        public DateTime DateRozhUser { get; set; }
+        public Position PositionUser { get; set; }
         #endregion
 
 
@@ -78,6 +90,8 @@ namespace ScannerFinalPDF.Model.ViewModel
                 OnPropertyChanged(nameof(rs));
             }
         }
+
+        #region Сроки
         private RelayCommand openAddSrokiWnd;
         public RelayCommand OpenAddSrokiWnd
         {
@@ -114,12 +128,148 @@ namespace ScannerFinalPDF.Model.ViewModel
                     {
                         resStr = DataWorker.CreateSroki(SrokiName, SrokiColdn);
                         UpdateAllDataView();
+                        SetNullValuesToProperties();
                         wnd.Close();
                     }
                 });
             }
         }
+        #endregion
 
+        #region РЦ
+        private RelayCommand openAddRsWnd;
+        public RelayCommand OpenAddRsWnd
+        {
+            get
+            {
+                return openAddRsWnd ?? new RelayCommand(obj =>
+                {
+                    OpenAddRsWindow();
+                });
+            }
+        }
+
+        private void OpenAddRsWindow()
+        {
+            AddNewRsWindow newRsWindow = new AddNewRsWindow();
+            SetCenterPositionAndOpen(newRsWindow);
+        }
+
+        public RelayCommand addNewRs;
+
+        public RelayCommand AddNewRs
+        {
+            get
+            {
+                return addNewRs ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    string resStr = "";
+                    if (Email == null || Email.Replace(" ", "").Length == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        resStr = DataWorker.CreateRs(NameRS, Email);
+                        UpdateAllDataView();
+                        SetNullValuesToProperties();
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region Должность
+        private RelayCommand openAddPosWnd;
+        public RelayCommand OpenAddPosWnd
+        {
+            get
+            {
+                return openAddPosWnd ?? new RelayCommand(obj =>
+                {
+                    OpenAddPosWindow();
+                });
+            }
+        }
+
+        private void OpenAddPosWindow()
+        {
+            AddNewPosWindow newPosWindow = new AddNewPosWindow();
+            SetCenterPositionAndOpen(newPosWindow);
+        }
+
+        public RelayCommand addNewPos;
+
+        public RelayCommand AddNewPos
+        {
+            get
+            {
+                return addNewPos ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    string resStr = "";
+                    if (PosName == null || PosName.Replace(" ", "").Length == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        resStr = DataWorker.CreatePos(PosName);
+                        UpdateAllDataView();
+                        SetNullValuesToProperties();
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region Пользователь
+        private RelayCommand openAddUserWnd;
+        public RelayCommand OpenAddUserWnd
+        {
+            get
+            {
+                return openAddUserWnd ?? new RelayCommand(obj =>
+                {
+                    OpenAddUserWindow();
+                });
+            }
+        }
+
+        private void OpenAddUserWindow()
+        {
+            AddNewUserWindow newUserWindow = new AddNewUserWindow();
+            SetCenterPositionAndOpen(newUserWindow);
+        }
+
+        public RelayCommand addNewUser;
+
+        public RelayCommand AddNewUser
+        {
+            get
+            {
+                return addNewUser ?? new RelayCommand(obj =>
+                {
+                    Window wnd = obj as Window;
+                    string resStr = "";
+                    if (LoginUser == null && PassUser == null && FioUser == null && DateRozhUser == null && PositionUser == null || LoginUser.Replace(" ", "").Length == 0 && PassUser.Replace(" ", "").Length == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        resStr = DataWorker.CreateUser(LoginUser, PassUser, FioUser, DateRozhUser, PositionUser.Id);
+                        UpdateAllDataView();
+                        SetNullValuesToProperties();
+                        wnd.Close();
+                    }
+                });
+            }
+        }
+        #endregion
         private void SetCenterPositionAndOpen(Window window)
         {
             window.Owner = Application.Current.MainWindow;
@@ -127,7 +277,18 @@ namespace ScannerFinalPDF.Model.ViewModel
             window.ShowDialog();
         }
 
+
         #region updtae views
+        private void SetNullValuesToProperties()
+        {
+            // для РЦ
+            Email = null;
+            NameRS = 0;
+            // для Сроков
+            SrokiName = null;
+            SrokiColdn = 0;
+            
+        }
         private void UpdateAllDataView()
         {
             UpdateAllSrokiView();

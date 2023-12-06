@@ -307,6 +307,10 @@
     <Compile Include="Migrations\20231206093319_Initial.designer.cs">
       <DependentUpon>20231206093319_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20231206111648_Step2.cs" />
+    <Compile Include="Migrations\20231206111648_Step2.designer.cs">
+      <DependentUpon>20231206111648_Step2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\RelayCommand.cs" />
@@ -322,6 +326,9 @@
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CreateViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\AddNewPosWindow.xaml.cs">
+      <DependentUpon>AddNewPosWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddNewRsWindow.xaml.cs">
       <DependentUpon>AddNewRsWindow.xaml</DependentUpon>
     </Compile>
@@ -343,6 +350,10 @@
     <Compile Include="View\Pages\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddNewPosWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddNewRsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
