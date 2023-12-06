@@ -25,7 +25,6 @@ namespace ScannerFinalPDF.View.Pages
         public CreateZayvka()
         {
             InitializeComponent();
-            DataContext = new CreateViewModel(data_table_zayv, red_text, Nshop_TextBlock, CommentZayvki);
         }
     }
 }

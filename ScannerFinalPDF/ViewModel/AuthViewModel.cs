@@ -50,9 +50,10 @@ namespace ScannerFinalPDF.ViewModel
             {
                 secondForm = new MainHome();
                 secondForm.Show();
+                MainHome.Profile = authUser;
                 //if (authUser.Position == 0)
                 //{
-                    
+
 
 
                 //}

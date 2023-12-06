@@ -303,17 +303,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\20231206093319_Initial.cs" />
-    <Compile Include="Migrations\20231206093319_Initial.designer.cs">
-      <DependentUpon>20231206093319_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231206111648_Step2.cs" />
-    <Compile Include="Migrations\20231206111648_Step2.designer.cs">
-      <DependentUpon>20231206111648_Step2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20231206150108_Step3.cs" />
-    <Compile Include="Migrations\20231206150108_Step3.designer.cs">
-      <DependentUpon>20231206150108_Step3.cs</DependentUpon>
+    <Compile Include="Migrations\20231206183102_Initial.cs" />
+    <Compile Include="Migrations\20231206183102_Initial.designer.cs">
+      <DependentUpon>20231206183102_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Model\Data\ApplicationContext.cs" />
@@ -328,8 +320,6 @@
     <Compile Include="Model\Data\Sroki.cs" />
     <Compile Include="Model\Data\User.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
-    <Compile Include="ViewModel\CreateViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AddNewPosWindow.xaml.cs">
       <DependentUpon>AddNewPosWindow.xaml</DependentUpon>
     </Compile>
@@ -341,6 +331,9 @@
     </Compile>
     <Compile Include="View\AddNewUserWindow.xaml.cs">
       <DependentUpon>AddNewUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddNewZayvkaWindow.xaml.cs">
+      <DependentUpon>AddNewZayvkaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AlertPush.xaml.cs">
       <DependentUpon>AlertPush.xaml</DependentUpon>
@@ -367,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddNewUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddNewZayvkaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

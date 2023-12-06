@@ -167,6 +167,34 @@ namespace ScannerFinalPDF.Model.Data
             }
         }
 
+        public static void CreateMaket(string name, int length, int width, int colstr, int colotp, int fill, int idZayvki)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Maket newMaket = new Maket { ZayvkaId = idZayvki, Name = name, Length = length, Width = width, Colstr = colstr, Colotp = colotp, Count = colstr * colotp, Fill = fill, Kvadr = Convert.ToDouble((Convert.ToDouble(length) * Convert.ToDouble(width) * Convert.ToDouble(colstr * colotp)) / 1000000.0) };
+                db.Maket.Add(newMaket);
+                db.SaveChanges();
+            }
+        }
+
+        public static void CreateZayvka(int rsid, int idsroki, int idsotr,  int nshop, DateTime dateplan, string comment, List<Maket> makets)
+        {
+            Zayvka newZayvka = new Zayvka { NameRequest = $"SC-", SotrId = idsotr, RsId = rsid, SrokiId = idsroki, Status = "Новая заявка", NShop = nshop, DatePriem = DateTime.Now, DatePlanov = dateplan, Commentz = comment, NumberTruck = 1 };
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Zayvka.Add(newZayvka);
+                newZayvka.NameRequest += newZayvka.Id;
+                db.SaveChanges();
+
+            }
+            foreach (var maket in makets)
+            {
+                maket.ZayvkaId = newZayvka.Id;
+                DataWorker.CreateMaket(maket.Name, maket.Length, maket.Width, maket.Colstr, maket.Colotp, maket.Fill, maket.ZayvkaId);
+            }
+
+        }
+
         public static string DeletePosition(Position position)
         {
             string result = "Такой должности не существует";
@@ -214,6 +242,7 @@ namespace ScannerFinalPDF.Model.Data
             }
             return result;
         }
+     
 
     }
 }
