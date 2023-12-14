@@ -325,5 +325,36 @@ namespace ScannerFinalPDF.Model.Data
             return result;
         }
 
+        public static string EditZayvka(Zayvka OldZayvka, string newStatus)
+        {
+            string result = "Такой заявки не существует";
+            if (newStatus == "В работе"|| newStatus == "Отменено" )
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    Zayvka zayvka = db.Zayvka.FirstOrDefault(p => p.Id == OldZayvka.Id);
+                    zayvka.Status = newStatus;
+                    db.SaveChanges();
+                    result = $"Статус изменен!";
+                }
+                return result;
+            }
+            else
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    Zayvka zayvka = db.Zayvka.FirstOrDefault(p => p.Id == OldZayvka.Id);
+                    zayvka.Status = newStatus;
+                    zayvka.DateDostav = DateTime.Now;
+                    zayvka.DateClose = DateTime.Now;
+                    zayvka.NumberTruck = Math.Abs(zayvka.NameRequest.GetHashCode());
+                    db.SaveChanges();
+                    result = $"Статус изменен!";
+                }
+                return result;
+            }
+            
+        }
+
     }
 }

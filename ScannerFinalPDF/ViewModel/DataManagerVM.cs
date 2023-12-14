@@ -662,6 +662,66 @@ namespace ScannerFinalPDF.Model.ViewModel
         }
 
         #endregion
+
+        #region Алгоритм отмены/одобрения/закрытия заявки
+        private RelayCommand zayvkaRevoke;
+        public RelayCommand ZayvkaRevoke
+        {
+            get
+            {
+                return zayvkaRevoke ?? new RelayCommand(obj =>
+                {
+                    zayvkaRevokeAlg();
+                });
+            }
+        }
+
+        private void zayvkaRevokeAlg()
+        {
+            string res = DataWorker.EditZayvka(SelectedZayvka, "Отменено");
+            UpdateAllDataView();
+            MessageBox.Show(res);
+        }
+
+        private RelayCommand zayvkaVrabote;
+        public RelayCommand ZayvkaVrabote
+        {
+            get
+            {
+                return zayvkaVrabote ?? new RelayCommand(obj =>
+                {
+                    zayvkaVrabAlg();
+                });
+            }
+        }
+
+        private void zayvkaVrabAlg()
+        {
+            string res = DataWorker.EditZayvka(SelectedZayvka, "В работе");
+            UpdateAllDataView();
+            MessageBox.Show(res);
+        }
+
+        private RelayCommand zayvkaZakr;
+        public RelayCommand ZayvkaZakr
+        {
+            get
+            {
+                return zayvkaZakr ?? new RelayCommand(obj =>
+                {
+                    zayvkaZakrAlg();
+                });
+            }
+        }
+
+        private void zayvkaZakrAlg()
+        {
+            string res = DataWorker.EditZayvka(SelectedZayvka, "Завершено");
+            UpdateAllDataView();
+            MessageBox.Show(res);
+        }
+
+        #endregion
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)

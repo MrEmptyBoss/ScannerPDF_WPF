@@ -55,9 +55,9 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Создать заявку" Command="{Binding OpenAddZayvkaWnd}"/>
-                        <MenuItem Header="Одобрить заявку"/>
-                        <MenuItem Header="Закрыть заявку"/>
-                        <MenuItem Header="Отменить заявку"/>
+                        <MenuItem Header="Одобрить заявку" Command="{Binding ZayvkaVrabote}"/>
+                        <MenuItem Header="Закрыть заявку" Command="{Binding ZayvkaZakr}"/>
+                        <MenuItem Header="Отменить заявку" Command="{Binding ZayvkaRevoke}"/>
                         <MenuItem Header="Удалить заявку" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
@@ -68,8 +68,7 @@
                             <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path=Status}" Width="100"/>
                             <GridViewColumn Header="РЦ" DisplayMemberBinding="{Binding Path=RsZayvkaiId.Name}" Width="100"/>
                             <GridViewColumn Header="Срочность" DisplayMemberBinding="{Binding Path=SrokiZayvkaiId.Name}" Width="100"/>
-                            <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Path=DatePriem}" Width="100"/>
-                            <GridViewColumn Header="Кнопка" Width="100"/>
+                            <GridViewColumn Header="Дата создания заявки" DisplayMemberBinding="{Binding Path=DatePriem, StringFormat='dd.MM.yy HH:mm'}" Width="150"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -131,9 +130,9 @@
                             <GridViewColumn Header="Логин" DisplayMemberBinding="{Binding Path=Login}" Width="150"/>
                             <GridViewColumn Header="Пароль" DisplayMemberBinding="{Binding Path=Pass}" Width="150" />
                             <GridViewColumn Header="ФИО" DisplayMemberBinding="{Binding Path=Fio}" Width="150" />
-                            <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Path=Date_rozh}" Width="150" />
+                            <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Path=Date_rozh, StringFormat='dd.MM.yyyy'}" Width="150" />
                             <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Path=UserPosition.Name}" Width="150" />
-                            <GridViewColumn Header="Дата создания учетной записи" DisplayMemberBinding="{Binding Path=Date_create}" Width="200" />
+                            <GridViewColumn Header="Дата создания учетной записи" DisplayMemberBinding="{Binding Path=Date_create, StringFormat='dd.MM.yy'}" Width="200" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -159,7 +158,8 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            
+            <Button Content="Сформировать отчет" Command="{Binding OpenReportCreateWnd}" Margin="0,10,10,0"/>
+            <Button Content="Сформировать накладную" Command="{Binding OpenReportCreateWnd}" Margin="0,10,10,0"/>
         </StackPanel>
         <Grid.RowDefinitions>
             <RowDefinition Height='30'/>
