@@ -1,6 +1,7 @@
 ﻿using ScannerFinalPDF.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ScannerFinalPDF.Model.Data
 {
@@ -24,6 +25,23 @@ namespace ScannerFinalPDF.Model.Data
         public List<Maket> Makets { get; set; }
         public string Status { get; set; }
         public string Commentz { get; set; }
+        [NotMapped]
+        public RS RsZayvkaiId
+        {
+            get
+            {
+                return DataWorker.GetRSid(RsId);
+            }
+        }
+
+        [NotMapped]
+        public Sroki SrokiZayvkaiId
+        {
+            get
+            {
+                return DataWorker.GetSrokiId(SrokiId);
+            }
+        }
 
 
         public Zayvka() { }

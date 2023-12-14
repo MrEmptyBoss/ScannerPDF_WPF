@@ -30,19 +30,19 @@ namespace ScannerFinalPDF.Model.ViewModel
         
         #region Данные
         // свойства срока
-        public string SrokiName { get; set; }
-        public int SrokiColdn { get; set; }
+        public static string SrokiName { get; set; }
+        public static int SrokiColdn { get; set; }
         // свойства РЦ
-        public int NameRS { get; set; }
-        public string Email { get; set; }
+        public static int NameRS { get; set; }
+        public static string Email { get; set; }
         // свойства должности
-        public string PosName { get; set; }
+        public static string PosName { get; set; }
         //  свойства пользователя
-        public string LoginUser { get; set; }
-        public string PassUser { get; set; }
-        public string FioUser { get; set; }
-        public DateTime DateRozhUser { get; set; }
-        public Position PositionUser { get; set; }
+        public static string LoginUser { get; set; }
+        public static string PassUser { get; set; }
+        public static string FioUser { get; set; }
+        public static DateTime DateRozhUser { get; set; }
+        public static Position PositionUser { get; set; }
         // макеты
         private List<Maket> scanner_Maket;
         public Maket SelectedMaket { get; set; }
@@ -54,10 +54,10 @@ namespace ScannerFinalPDF.Model.ViewModel
 
         // свойства для выделенных элементов 
         public TabItem SelectedTabItem { get; set; }
-        public User SelectedUser { get; set; }
-        public Position SelectedPos { get; set; }
-        public Sroki SelectedSrok { get; set; }
-        public RS SelectedRs { get; set; }
+        public static User SelectedUser { get; set; }
+        public static Position SelectedPos { get; set; }
+        public static Sroki SelectedSrok { get; set; }
+        public static RS SelectedRs { get; set; }
         public Zayvka SelectedZayvka { get; set; }
 
         #endregion
@@ -132,6 +132,12 @@ namespace ScannerFinalPDF.Model.ViewModel
             SetCenterPositionAndOpen(newSrokiWindow);
         }
 
+        private void OpenEditSrokWindow(Sroki sroki)
+        {
+            EditSrokiWindow EditNewSrokiWindow = new EditSrokiWindow(sroki);
+            SetCenterPositionAndOpen(EditNewSrokiWindow);
+        }
+
         public RelayCommand addNewSroki;
 
         public RelayCommand AddNewSroki
@@ -175,6 +181,13 @@ namespace ScannerFinalPDF.Model.ViewModel
         {
             AddNewRsWindow newRsWindow = new AddNewRsWindow();
             SetCenterPositionAndOpen(newRsWindow);
+        }
+
+
+        private void OpenEditRsWindow(RS rS)
+        {
+            EditRsWindow editRsWindow = new EditRsWindow(rS);
+            SetCenterPositionAndOpen(editRsWindow);
         }
 
         public RelayCommand addNewRs;
@@ -222,6 +235,12 @@ namespace ScannerFinalPDF.Model.ViewModel
             SetCenterPositionAndOpen(newPosWindow);
         }
 
+        private void OpenEditPosWindow(Position position)
+        {
+            EditPosWindow editPosWindow = new EditPosWindow(position);
+            SetCenterPositionAndOpen(editPosWindow);
+        }
+
         public RelayCommand addNewPos;
 
         public RelayCommand AddNewPos
@@ -265,6 +284,12 @@ namespace ScannerFinalPDF.Model.ViewModel
         {
             AddNewUserWindow newUserWindow = new AddNewUserWindow();
             SetCenterPositionAndOpen(newUserWindow);
+        }
+
+        private void OpenEditUserWindow(User user)
+        {
+            EditUserWindow editUserWindow = new EditUserWindow(user);
+            SetCenterPositionAndOpen(editUserWindow);
         }
 
         public RelayCommand addNewUser;
@@ -328,9 +353,145 @@ namespace ScannerFinalPDF.Model.ViewModel
                         resultStr = DataWorker.DeleteUser(SelectedUser);
                         UpdateAllDataView();
                     }
+                    // ели заявка
+                    if (SelectedTabItem.Name == "Zayvki" && SelectedZayvka != null)
+                    {
+                        resultStr = DataWorker.DeleteZayvka(SelectedZayvka);
+                        UpdateAllDataView();
+                    }
                     // обновление
                     SetNullValuesToProperties();
 
+                });
+            }
+        }
+        #endregion
+
+        #region Редактирование в БД
+        private RelayCommand editItem;
+
+        public RelayCommand EditItem
+        {
+            get
+            {
+                return editItem ?? new RelayCommand(obj =>
+                {
+                    string resultStr = "Ничего не выбрано";
+                    //если должность
+                    if (SelectedTabItem.Name == "PositionsTab" && SelectedPos != null)
+                    {
+                        OpenEditPosWindow(SelectedPos);
+                    }
+                    //если РЦ
+                    if (SelectedTabItem.Name == "RSTab" && SelectedRs != null)
+                    {
+                        OpenEditRsWindow(SelectedRs);
+                    }
+                    //если срочность
+                    if (SelectedTabItem.Name == "SrokiTab" && SelectedSrok != null)
+                    {
+                        OpenEditSrokWindow(SelectedSrok);
+                    }
+                    //если сотрудник
+                    if (SelectedTabItem.Name == "UsersTab" && SelectedUser != null)
+                    {
+                        OpenEditUserWindow(SelectedUser);
+                    }
+
+                });
+            }
+        }
+        #endregion
+
+        #region Команды редактирования
+        private RelayCommand editPos;
+        public RelayCommand EditPos
+        {
+            get
+            {
+                return editPos ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "Должность не выбрана";
+                    if(SelectedPos != null)
+                    {
+                        resultStr = DataWorker.EditPos(SelectedPos, PosName);
+                        UpdateAllDataView();
+                        window.Close();
+                    }
+                    else
+                    {
+
+                    }
+                });
+            }
+        }
+
+        private RelayCommand editRs;
+        public RelayCommand EditRs
+        {
+            get
+            {
+                return editRs ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "РЦ не выбран";
+                    if (SelectedRs != null)
+                    {
+                        resultStr = DataWorker.EditRS(SelectedRs, NameRS, Email);
+                        UpdateAllDataView();
+                        window.Close();
+                    }
+                    else
+                    {
+
+                    }
+                });
+            }
+        }
+
+        private RelayCommand editSroki;
+        public RelayCommand EditSroki
+        {
+            get
+            {
+                return editSroki ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "Срочность не выбрана";
+                    if (SelectedSrok != null)
+                    {
+                        resultStr = DataWorker.EditSroki(SelectedSrok, SrokiName, SrokiColdn);
+                        UpdateAllDataView();
+                        window.Close();
+                    }
+                    else
+                    {
+
+                    }
+                });
+            }
+        }
+
+        private RelayCommand editUser;
+        public RelayCommand EditUser
+        {
+            get
+            {
+                return editUser ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "Сотрудник не выбран";
+                    if (SelectedUser != null)
+                    {
+                        resultStr = DataWorker.EditUser(SelectedUser, LoginUser, PassUser, FioUser, DateRozhUser, PositionUser.Id);
+                        UpdateAllDataView();
+                        window.Close();
+                    }
+                    else
+                    {
+
+                    }
                 });
             }
         }
@@ -471,7 +632,7 @@ namespace ScannerFinalPDF.Model.ViewModel
                     {
                         DateTime now = DateTime.Now;
                         DataWorker.CreateZayvka(SelectedRSZayvka.Id, SelectedSrokZayvka.id, MainHome.Profile.id, NshopZ, now.AddDays(SelectedSrokZayvka.Coldn), new TextRange(AddNewZayvkaWindow.CommentZayvkiR.Document.ContentStart, AddNewZayvkaWindow.CommentZayvkiR.Document.ContentEnd).Text, scanner_Maket);
-                        
+                        UpdateAllDataView();
                     }
 
                 });

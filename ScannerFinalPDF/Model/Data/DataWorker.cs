@@ -179,17 +179,30 @@ namespace ScannerFinalPDF.Model.Data
 
         public static void CreateZayvka(int rsid, int idsroki, int idsotr,  int nshop, DateTime dateplan, string comment, List<Maket> makets)
         {
-            Zayvka newZayvka = new Zayvka { NameRequest = $"SC-", SotrId = idsotr, RsId = rsid, SrokiId = idsroki, Status = "Новая заявка", NShop = nshop, DatePriem = DateTime.Now, DatePlanov = dateplan, Commentz = comment, NumberTruck = 1 };
+            int idz;
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Zayvka.Add(newZayvka);
-                newZayvka.NameRequest += newZayvka.Id;
-                db.SaveChanges();
+                List<Zayvka> zayvki = db.Zayvka.ToList();
+                if (zayvki.Count != 0)
+                {
+                    idz = zayvki.Last().Id + 1;
+                    Zayvka newZayvka = new Zayvka { NameRequest = $"SC-{idz}", SotrId = idsotr, RsId = rsid, SrokiId = idsroki, Status = "Новая заявка", NShop = nshop, DatePriem = DateTime.Now, DatePlanov = dateplan, Commentz = comment, NumberTruck = 1 };
+                    db.Zayvka.Add(newZayvka);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    idz = 0;
+                    Zayvka newZayvka = new Zayvka { NameRequest = $"SC-{idz}", SotrId = idsotr, RsId = rsid, SrokiId = idsroki, Status = "Новая заявка", NShop = nshop, DatePriem = DateTime.Now, DatePlanov = dateplan, Commentz = comment, NumberTruck = 1 };
+                    db.Zayvka.Add(newZayvka);
+                    db.SaveChanges();
+                }
+                
 
             }
             foreach (var maket in makets)
             {
-                maket.ZayvkaId = newZayvka.Id;
+                maket.ZayvkaId = idz;
                 DataWorker.CreateMaket(maket.Name, maket.Length, maket.Width, maket.Colstr, maket.Colotp, maket.Fill, maket.ZayvkaId);
             }
 
@@ -209,7 +222,7 @@ namespace ScannerFinalPDF.Model.Data
 
         public static string DeleteRs(RS Rs)
         {
-            string result = "Такой должности не существует";
+            string result = "Такого РЦ не существует";
             using (ApplicationContext db = new ApplicationContext())
             {
                 db.RS.Remove(Rs);
@@ -242,7 +255,75 @@ namespace ScannerFinalPDF.Model.Data
             }
             return result;
         }
-     
+        public static string DeleteZayvka(Zayvka zayvka)
+        {
+            string result = "Такой заявки не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Zayvka.Remove(zayvka);
+                db.SaveChanges();
+                result = $"Удалена заявка {zayvka.NameRequest}";
+            }
+            return result;
+        }
+
+        public static string EditPos(Position OldPos, string newNamePos)
+        {
+            string result = "Такой должности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Position position = db.Positions.FirstOrDefault(p => p.Id == OldPos.Id);
+                position.Name = newNamePos;
+                db.SaveChanges();
+                result = $"Изменена должность";
+            }
+            return result;
+        }
+
+        public static string EditRS(RS OldRS, int newNameRS, string newEmailRs)
+        {
+            string result = "Такого РЦ не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                RS rs = db.RS.FirstOrDefault(p => p.Id == OldRS.Id);
+                rs.Name = newNameRS;
+                rs.Email = newEmailRs;
+                db.SaveChanges();
+                result = $"Изменен РЦ";
+            }
+            return result;
+        }
+
+        public static string EditSroki(Sroki OldSroki, string newNameSroki, int newColdnSroki)
+        {
+            string result = "Такой срочности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Sroki sroki = db.Sroki.FirstOrDefault(p => p.id == OldSroki.id);
+                sroki.Name = newNameSroki;
+                sroki.Coldn = newColdnSroki;
+                db.SaveChanges();
+                result = $"Изменена срочность";
+            }
+            return result;
+        }
+
+        public static string EditUser(User OldUser, string newLogin, string newPass, string newFio, DateTime newDate_rozh, int newPositionId)
+        {
+            string result = "Такой срочности не существует";
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                User user = db.Users.FirstOrDefault(p => p.id == OldUser.id);
+                user.Login = newLogin;
+                user.Pass = newPass;
+                user.Fio = newFio;
+                user.Date_rozh = newDate_rozh;
+                user.PositionId = newPositionId;
+                db.SaveChanges();
+                result = $"Изменен сотрудник";
+            }
+            return result;
+        }
 
     }
 }
