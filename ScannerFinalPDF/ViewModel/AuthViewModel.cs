@@ -11,7 +11,6 @@ using ScannerFinalPDF.View;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ScannerFinalPDF.View.Pages;
 using ScannerFinalPDF.Model.ViewModel;
 
 namespace ScannerFinalPDF.ViewModel

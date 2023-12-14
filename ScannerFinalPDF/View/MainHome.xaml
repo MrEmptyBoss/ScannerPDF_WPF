@@ -54,20 +54,21 @@
                 </TabItem.Header>
                 <TabItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Создать заявку"/>
+                        <MenuItem Header="Создать заявку" Command="{Binding OpenAddZayvkaWnd}"/>
                         <MenuItem Header="Одобрить заявку"/>
                         <MenuItem Header="Закрыть заявку"/>
                         <MenuItem Header="Отменить заявку"/>
+                        <MenuItem Header="Удалить заявку" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
                 <ListView x:Name="ViewAllZayvki" ItemsSource="{Binding AllZayvki}" SelectedItem="{Binding SelectedZayvka}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Номер заявки" Width="100"/>
-                            <GridViewColumn Header="Статус" Width="100"/>
-                            <GridViewColumn Header="РЦ" Width="100"/>
-                            <GridViewColumn Header="Срочность" Width="100"/>
-                            <GridViewColumn Header="Время" Width="100"/>
+                            <GridViewColumn Header="Номер заявки" DisplayMemberBinding="{Binding Path=NameRequest}" Width="100"/>
+                            <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path=Status}" Width="100"/>
+                            <GridViewColumn Header="РЦ" DisplayMemberBinding="{Binding Path=RsZayvkaiId.Name}" Width="100"/>
+                            <GridViewColumn Header="Срочность" DisplayMemberBinding="{Binding Path=SrokiZayvkaiId.Name}" Width="100"/>
+                            <GridViewColumn Header="Время" DisplayMemberBinding="{Binding Path=DatePriem}" Width="100"/>
                             <GridViewColumn Header="Кнопка" Width="100"/>
                         </GridView>
                     </ListView.View>
@@ -80,7 +81,7 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Создать РЦ" Command="{Binding OpenAddRsWnd}"/>
-                        <MenuItem Header="Изменить РЦ"/>
+                        <MenuItem Header="Изменить РЦ" Command="{Binding EditItem}"/>
                         <MenuItem Header="Удалить РЦ" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
@@ -100,7 +101,7 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Создать срочность" Command="{Binding OpenAddSrokiWnd}"/>
-                        <MenuItem Header="Изменить срочность"/>
+                        <MenuItem Header="Изменить срочность" Command="{Binding EditItem}"/>
                         <MenuItem Header="Удалить срочность" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
@@ -120,7 +121,7 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Создать сотрудника" Command="{Binding OpenAddUserWnd}"/>
-                        <MenuItem Header="Изменить данные сотрудника"/>
+                        <MenuItem Header="Изменить данные сотрудника" Command="{Binding EditItem}"/>
                         <MenuItem Header="Удалить сотрудника" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
@@ -144,7 +145,7 @@
                 <TabItem.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Создать должность" Command="{Binding OpenAddPosWnd}"/>
-                        <MenuItem Header="Изменить должность"/>
+                        <MenuItem Header="Изменить должность" Command="{Binding EditItem}"/>
                         <MenuItem Header="Удалить должность" Command="{Binding DeleteItem}"/>
                     </ContextMenu>
                 </TabItem.ContextMenu>
@@ -158,7 +159,7 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Создать заявку" Command="{Binding OpenAddZayvkaWnd}" Margin="0,10,10,0"/>
+            
         </StackPanel>
         <Grid.RowDefinitions>
             <RowDefinition Height='30'/>
