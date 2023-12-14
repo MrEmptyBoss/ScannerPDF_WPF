@@ -1,0 +1,112 @@
+﻿<Window x:Class="ScannerFinalPDF.View.AddNewZayvkaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScannerFinalPDF.View"
+        mc:Ignorable="d"
+        Title="AddNewZayvkaWindow" Height="550" Width="625"
+        ResizeMode="NoResize"
+        Name="OpenAddZayvkaWnd">
+    <Grid>
+        <Grid Name="MainContent" Grid.Row="1">
+            <TextBlock Text="Создание заявки" FontSize="22" FontWeight="Bold" FontFamily="OpenSans" Margin="20,18,387,471"/>
+            <TextBlock Text="Выбрать РЦ" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="20,50,460,447"/>
+            <ComboBox Height="25" Margin="20,89,494,406" ItemsSource="{Binding AllRs}" DisplayMemberPath="Name"  SelectedItem="{Binding SelectedRSZayvka}"/>
+            <TextBlock Text="Введите ТК" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="200,50,311,447"/>
+            <TextBlock Text="Напишите комментарий к заявке" FontSize="16" FontWeight="Bold" FontFamily="OpenSans" Margin="312,132,30,366"/>
+            <TextBox x:Name="Nshop_TextBlock" Height="25" Margin="200,89,311,406" Text="{Binding NshopZ}"/>
+            <TextBlock Text="Выбрать срочность заявки" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="336,50,30,447"/>
+            <ComboBox Height="25" Margin="336,89,30,406" ItemsSource="{Binding AllSroki}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSrokZayvka}"/>
+            <TextBlock Text="Загрузить макеты" FontSize="18" FontWeight="Bold" FontFamily="OpenSans" Margin="20,132,387,366"/>
+            <TextBlock Text="Для составлении таблицы с макетами вам нужно, &#10;выбрать папку с макетами, для одной заявки одна папка" FontSize="12" FontWeight="Regular" FontFamily="OpenSans" Margin="20,160,289,330" Foreground="#2D2D2D" Opacity="0.5"/>
+            <TextBlock x:Name="red_text" Text="Можете редактирировать кол-во отпечатков!" FontSize="16" FontWeight="Regular" FontFamily="OpenSans" Margin="236,234,30,260" Foreground="#D31D3E" Opacity="0"/>
+            <Button Height="30" Width="180" Background="Transparent" Margin="20,200,0,0" HorizontalAlignment="Left" VerticalAlignment ="Top" Command="{Binding UploadMaket}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="ImportFile" Height="30" Width="180" Margin="0,0,0,0">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/ZagrMBtn.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=ImportFile}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/ZagrMBtnAct.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <DataGrid x:Name="ViewAllMakets" Margin="20,260,30,66" AutoGenerateColumns="False" SelectedItem="{Binding SelectedMaket}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" CanUserReorderColumns="False" Visibility="Hidden">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="90" Visibility="Hidden" Binding="{Binding Path=id}"/>
+                    <DataGridTextColumn Header="Название" Width="90" Binding="{Binding Path=Name}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Длина" Width="60" Binding="{Binding Path=Length}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Ширина" Width="60" Binding="{Binding Path=Width}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Кол-во стр" Width="70" Binding="{Binding Path=Colstr}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Кол-во отпечатков" Width="120" Binding="{Binding Path=Colotp}"/>
+                    <DataGridTextColumn Header="Итого шт" Width="65" Visibility="Hidden" Binding="{Binding Path=Count}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Заливка" Width="55" Binding="{Binding Path=Fill}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="м. кв." Width="50" Visibility="Hidden" Binding="{Binding Path=Kvadr}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="ID req" Width="50" Visibility="Hidden" Binding="{Binding Path=Idrequest}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Height="30" Background="Transparent" Margin="395,468,30,0" VerticalAlignment ="Top" Command="{Binding CreateZayvkaBtn}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="border" BorderThickness="0"
+                                                BorderBrush="Transparent" 
+                                                Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Image Name="SaveFile" Height="30" Width="180">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/SendZBtn.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=SaveFile}"
+                                             Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/SendZBtnAct.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            <RichTextBox x:Name="CommentZayvki" Margin="336,159,30,291"/>
+        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="520"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

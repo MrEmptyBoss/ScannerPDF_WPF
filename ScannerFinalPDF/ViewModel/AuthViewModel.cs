@@ -11,11 +11,11 @@ using ScannerFinalPDF.View;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ScannerFinalPDF.View.Pages;
+using ScannerFinalPDF.Model.ViewModel;
 
 namespace ScannerFinalPDF.ViewModel
 {
-    class AuthViewModel : ViewModelBase
+    class AuthViewModel : DataManagerVM
     {
         MainHome secondForm;
 
@@ -30,7 +30,7 @@ namespace ScannerFinalPDF.ViewModel
         {
             get
             {
-                return new RelayCommand(() => AuthObr());
+                return new GalaSoft.MvvmLight.CommandWpf.RelayCommand(() => AuthObr());
             }
         }
 
@@ -42,33 +42,24 @@ namespace ScannerFinalPDF.ViewModel
             User authUser = null;
             using(ApplicationContext db = new ApplicationContext())
             {
-                authUser = db.Users.Where(b => b.Login == login && b.Pass == pass).FirstOrDefault();
+                List<User> users = DataWorker.GetAlluser();
+                authUser = users.Where(b => b.Login == login && b.Pass == pass).FirstOrDefault();
             }
             if (authUser != null)
             {
                 secondForm = new MainHome();
                 secondForm.Show();
-                //исправить!!!!
-                var s = secondForm.OpenProfile.Template;
-                var myTextBlock = (TextBlock)s.FindName("nameuser", secondForm.OpenProfile);
-                myTextBlock.Text = authUser.Fio;
-                if (authUser.Position == 0)
-                {
-                    
-                    secondForm.panelupr.Visibility = Visibility.Hidden;
-                    secondForm.paneluprb.Visibility = Visibility.Hidden;
+                MainHome.Profile = authUser;
+                //if (authUser.Position == 0)
+                //{
 
-                    secondForm.ZakrB.Visibility = Visibility.Hidden;
-                    secondForm.ZakrZ.Visibility = Visibility.Hidden;
 
-                    secondForm.OpenZB.Visibility = Visibility.Hidden;
-                    secondForm.OpenZ.Visibility = Visibility.Hidden;
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                }
+                //}
                 foreach (Window item in Application.Current.Windows)
                 {
                     if (item.DataContext == this) item.Close();

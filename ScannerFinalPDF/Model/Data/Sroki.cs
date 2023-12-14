@@ -6,33 +6,14 @@ using System.Threading.Tasks;
 
 namespace ScannerFinalPDF.Model.Data
 {
-    class Sroki
+    public class Sroki
     {
         public int id { get; set; }
-        private string name;
-        private int coldn;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-
-        }
-
-        public int Coldn
-        {
-            get { return coldn; }
-            set { coldn = value; }
-
-        }
+        public string Name { get; set; }
+        public int Coldn { get; set; }
 
 
         public Sroki() { }
 
-        public Sroki(string name, int coldn)
-        {
-            this.name = name;
-            this.coldn = coldn;
-        }
     }
 }
