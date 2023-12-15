@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -82,6 +83,25 @@ namespace ScannerFinalPDF.Model.Data
             {
                 Position pos = db.Positions.FirstOrDefault(p => p.Id == id);
                 return pos;
+            }
+
+        }
+
+        public static List<Zayvka> GetZayvkaRSDates(DateTime dateStart, DateTime dateEnd, int idRS)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<Zayvka> zayvki = db.Zayvka.Where(z => z.DatePriem >= dateStart && z.DatePriem <= dateEnd.AddDays(1) && z.RsId == idRS).ToList();
+                return zayvki;
+            }
+
+        }
+        public static List<Zayvka> GetZayvkaRSDate(DateTime dateStart, int idRS)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<Zayvka> zayvki = db.Zayvka.Where(z => z.DatePriem >= dateStart && z.DatePriem <= dateStart.AddDays(1) && z.RsId == idRS).ToList();
+                return zayvki;
             }
 
         }

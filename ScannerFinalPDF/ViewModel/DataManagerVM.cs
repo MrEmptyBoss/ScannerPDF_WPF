@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using Microsoft.Win32;
 using ScannerFinalPDF.Model.Data;
+using ScannerFinalPDF.Model.Documents;
 using ScannerFinalPDF.Model.Scanner;
 using ScannerFinalPDF.View;
 using ScannerFinalPDF.ViewModel;
@@ -59,6 +60,9 @@ namespace ScannerFinalPDF.Model.ViewModel
         public static Sroki SelectedSrok { get; set; }
         public static RS SelectedRs { get; set; }
         public Zayvka SelectedZayvka { get; set; }
+
+        //свойства для накладной
+
 
         #endregion
 
@@ -661,6 +665,25 @@ namespace ScannerFinalPDF.Model.ViewModel
             return folderPath;
         }
 
+        public static string SaveDialog()  // Открытие проводника
+        {
+            string filePath = null;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Title = "Выберите место и имя файла Excel",
+                Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
+            };
+
+            Nullable<bool> result = saveFileDialog.ShowDialog();
+            if (result == true)
+            {
+                filePath = saveFileDialog.FileName;
+            }
+            return filePath;
+        }
+
+
         #endregion
 
         #region Алгоритм отмены/одобрения/закрытия заявки
@@ -721,6 +744,63 @@ namespace ScannerFinalPDF.Model.ViewModel
             MessageBox.Show(res);
         }
 
+        #endregion
+
+        #region Алгоритм создания накладной
+        private RelayCommand openCreateNaklWnd;
+        public RelayCommand OpenCreateNaklWnd
+        {
+            get
+            {
+                return openCreateNaklWnd ?? new RelayCommand(obj =>
+                {
+                    OpenCreateNaklWindow();
+                });
+            }
+        }
+
+        private void OpenCreateNaklWindow()
+        {
+            CreateNaklWindow newNaklWindow = new CreateNaklWindow();
+            SetCenterPositionAndOpen(newNaklWindow);
+        }
+
+        private RelayCommand createNakl;
+
+        public RelayCommand CreateNakl
+        {
+            get
+            {
+                return createNakl ?? new RelayCommand(obj =>
+                {
+                    if (CreateNaklWindow.SelectedDates != null)
+                    {
+                        string folderPath = SaveDialog();
+                        Nakladnay_Excel nakladnay_Excel = new Nakladnay_Excel();
+                        if (CreateNaklWindow.SelectedDates.Count == 1)
+                        {
+                            List<Zayvka> zayvkas = DataWorker.GetZayvkaRSDate(CreateNaklWindow.SelectedDates[0].Date, SelectedRs.Id);
+                            nakladnay_Excel.CreateNakladnDoc(folderPath, zayvkas);
+                        }
+                        else if (CreateNaklWindow.SelectedDates.Count == 2)
+                        {
+                            List<Zayvka> zayvkas = DataWorker.GetZayvkaRSDates(CreateNaklWindow.SelectedDates[0].Date, CreateNaklWindow.SelectedDates[1].Date, SelectedRs.Id);
+                            nakladnay_Excel.CreateNakladnDoc(folderPath, zayvkas);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Выберите две даты");
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не выбрали дату");
+                    }
+
+                });
+            }
+        }
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;
 
