@@ -67,6 +67,15 @@ namespace ScannerFinalPDF.Model.Data
             }
             
         }
+        public static User GetSotrId(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                User sotr = db.Users.FirstOrDefault(p => p.id == id);
+                return sotr;
+            }
+
+        }
         public static Sroki GetSrokiId(int id)
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -102,6 +111,16 @@ namespace ScannerFinalPDF.Model.Data
             {
                 List<Zayvka> zayvki = db.Zayvka.Where(z => z.DatePriem >= dateStart && z.DatePriem <= dateStart.AddDays(1) && z.RsId == idRS).ToList();
                 return zayvki;
+            }
+
+        }
+
+        public static List<Maket> GetMaketsId(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<Maket> makets = db.Maket.Where(p => p.ZayvkaId == id).ToList();
+                return makets;
             }
 
         }

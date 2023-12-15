@@ -324,6 +324,7 @@
     <Compile Include="Model\Data\ApplicationContext.cs" />
     <Compile Include="Model\Data\RelayCommand.cs" />
     <Compile Include="Model\Documents\Nakladnay_Excel.cs" />
+    <Compile Include="Model\Documents\Report_Excel.cs" />
     <Compile Include="ViewModel\DataManagerVM.cs" />
     <Compile Include="Model\Data\DataWorker.cs" />
     <Compile Include="Model\Data\Maket.cs" />
@@ -373,6 +374,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CreateReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditPosWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -403,6 +408,9 @@
     </Compile>
     <Compile Include="View\CreateNaklWindow.xaml.cs">
       <DependentUpon>CreateNaklWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateReportWindow.xaml.cs">
+      <DependentUpon>CreateReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditPosWindow.xaml.cs">
       <DependentUpon>EditPosWindow.xaml</DependentUpon>

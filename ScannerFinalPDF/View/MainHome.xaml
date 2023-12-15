@@ -158,7 +158,7 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Сформировать отчет" Command="{Binding OpenReportCreateWnd}" Margin="0,10,10,0"/>
+            <Button Content="Сформировать отчет" Command="{Binding OpenCreateReportWnd}" Margin="0,10,10,0"/>
             <Button Content="Сформировать накладную" Command="{Binding OpenCreateNaklWnd}" Margin="0,10,10,0"/>
         </StackPanel>
         <Grid.RowDefinitions>

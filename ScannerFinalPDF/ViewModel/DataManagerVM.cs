@@ -61,8 +61,6 @@ namespace ScannerFinalPDF.Model.ViewModel
         public static RS SelectedRs { get; set; }
         public Zayvka SelectedZayvka { get; set; }
 
-        //свойства для накладной
-
 
         #endregion
 
@@ -746,7 +744,7 @@ namespace ScannerFinalPDF.Model.ViewModel
 
         #endregion
 
-        #region Алгоритм создания накладной
+        #region Алгоритм создания накладной - отчета
         private RelayCommand openCreateNaklWnd;
         public RelayCommand OpenCreateNaklWnd
         {
@@ -792,6 +790,61 @@ namespace ScannerFinalPDF.Model.ViewModel
                             MessageBox.Show("Выберите две даты");
                         }
                         
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не выбрали дату");
+                    }
+
+                });
+            }
+        }
+
+        private RelayCommand openCreateReportlWnd;
+        public RelayCommand OpenCreateReportWnd
+        {
+            get
+            {
+                return openCreateReportlWnd ?? new RelayCommand(obj =>
+                {
+                    OpenCreateReportWindow();
+                });
+            }
+        }
+
+        private void OpenCreateReportWindow()
+        {
+            CreateReportWindow newReportlWindow = new CreateReportWindow();
+            SetCenterPositionAndOpen(newReportlWindow);
+        }
+
+        private RelayCommand createReport;
+
+        public RelayCommand CreateReport
+        {
+            get
+            {
+                return createReport ?? new RelayCommand(obj =>
+                {
+                    if (CreateReportWindow.SelectedDates != null)
+                    {
+                        string folderPath = SaveDialog();
+                        Report_Excel rep_Excel = new Report_Excel();
+                        if (CreateReportWindow.SelectedDates.Count == 1)
+                        {
+                            List<Zayvka> zayvkas = DataWorker.GetZayvkaRSDate(CreateReportWindow.SelectedDates[0].Date, SelectedRs.Id);
+                            rep_Excel.CreateReportDoc(folderPath, zayvkas);
+                        }
+                        else if (CreateReportWindow.SelectedDates.Count == 2)
+                        {
+                            List<Zayvka> zayvkas = DataWorker.GetZayvkaRSDates(CreateReportWindow.SelectedDates[0].Date, CreateReportWindow.SelectedDates[1].Date, SelectedRs.Id);
+                            rep_Excel.CreateReportDoc(folderPath, zayvkas);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Выберите две даты");
+                        }
+
                     }
                     else
                     {
